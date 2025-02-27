@@ -10,3 +10,5 @@ body {
     flex-direction: column;
     /* background-color: #72795B; */
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
