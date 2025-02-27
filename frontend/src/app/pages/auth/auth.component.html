@@ -1,0 +1,24 @@
+<section class="Login__section">
+    <div class="auth-container">
+        @if (!isRegistering) {
+        <h2>Logga in</h2>
+        <form class="login__form">
+            <input type="text" placeholder="Användarnamn" required>
+            <input type="password" placeholder="Lösenord" required>
+            <button type="submit">Logga in</button>
+        </form>
+        <p class="toggle-text" (click)="toggleForm()">Har du inget konto? <span class="register__span">Registrera
+                dig</span></p>
+        <p class="toggle-text">Glömt lösenord?</p>
+        } @else {
+        <h2>Registrera dig</h2>
+        <form class="login__form">
+            <input type="text" placeholder="Användarnamn" required>
+            <input type="email" placeholder="E-post" required>
+            <input type="password" placeholder="Lösenord" required>
+            <button type="submit">Registrera</button>
+        </form>
+        <p class="toggle-text" (click)="toggleForm()">Har du redan ett konto? <span>Logga in</span></p>
+        }
+    </div>
+</section>

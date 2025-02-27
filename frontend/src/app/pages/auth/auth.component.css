@@ -1,0 +1,71 @@
+.auth-container {
+    padding: 20px;
+    background-color: rgb(252, 252, 252, 0.6);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+input {
+    margin: 10px 0;
+}
+
+input,
+button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4A7390;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #4d9bd2;
+}
+
+.toggle-text {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: 14px;
+    margin-top: 15px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.toggle-text:hover {
+    color: #4A7390;
+}
+
+.Login__section {
+    background-image: url('/assets/backgrounds/background1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+}
+
+.login__form input {
+    border: 1px solid #4A7390 !important;
+}
