@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { CalendarComponent } from "../../components/calendar/calendar.component";
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-history',
   imports: [CalendarComponent],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  templateUrl: './history.component.html',
+  styleUrl: './history.component.css'
 })
-export class ProfileComponent {
+export class HistoryComponent {
 
 }

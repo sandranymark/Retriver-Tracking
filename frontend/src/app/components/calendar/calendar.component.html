@@ -1,0 +1,46 @@
+<div class="calendar-container">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+
+    <h3>Senaste träningspassen</h3>
+    @if (recentSessions.length > 0) {
+    <ul>
+        @for (session of recentSessions; track session.date) {
+        <li>
+            <strong>{{ session.date }}:</strong> {{ session.title }} - {{ session.details }}
+        </li>
+        }
+    </ul>
+    } @else {
+    <p>Inga träningspass har loggats ännu.</p>
+    }
+
+    <!-- 🟢 MODAL: Visa ett träningspass -->
+    @if (selectedSession) {
+    <div class="modal" (click)="closeModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h2>{{ selectedSession.title }}</h2>
+            <p><strong>Datum:</strong> {{ selectedSession.date }}</p>
+            <p><strong>Detaljer:</strong> {{ selectedSession.details }}</p>
+        </div>
+    </div>
+    }
+
+    <!-- 🟢 MODAL: Lägg till nytt träningspass -->
+    @if (showAddTrainingModal) {
+    <div class="modal" (click)="closeAddTrainingModal()" (touchend)="closeAddTrainingModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()" (touchend)="$event.stopPropagation()">
+            <span class="close" (click)="closeAddTrainingModal()" (touchend)="closeAddTrainingModal()">&times;</span>
+            <h3>Lägg till nytt träningspass</h3>
+            <p><strong>Datum:</strong> {{ selectedDate }}</p>
+            <article class="input-field">
+                <input class="trainingSession-input" type="text" [(ngModel)]="newTrainingTitle" placeholder="Titel">
+                <textarea class="trainingSession-input" [(ngModel)]="newTrainingDetails"
+                    placeholder="Beskriv träningen"></textarea>
+                <button class="add-btn" (click)="addTraining()" (touchend)="addTraining()">Lägg till</button>
+            </article>
+        </div>
+    </div>
+    }
+
+</div>

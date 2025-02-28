@@ -1,0 +1,108 @@
+.calendar-container {
+    max-width: 900px;
+    margin: 20px auto;
+    height: 100vh;
+}
+
+
+
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.trainingSession-input {
+    font-family: roboto;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.add-btn {
+    background: #4CAF50;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 1px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+.add-training input,
+.add-training textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+.add-training button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.add-training button:hover {
+    background: #45a049;
+}
+
+
+
+
+
+
+
+
+/* Anpassa för mindre skärmar, t.ex. iPhone SE (375px bred) */
+@media screen and (max-width: 400px) {
+    .calendar-container {
+        max-width: 100%;
+        padding: 10px;
+        overflow-x: hidden;
+    }
+
+    .fc {
+        font-size: 12px;
+    }
+
+    .fc-daygrid-day {
+        min-width: 0;
+    }
+
+    .fc-scrollgrid {
+        overflow-x: hidden !important;
+    }
+}
