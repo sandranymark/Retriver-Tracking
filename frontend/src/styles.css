@@ -1,4 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --bg-peach: #fde6d2;
+    --bg-light-blue: #d6f0f5;
+    --primary-color: #ff8c42;
+    --text-dark: #333;
+    --text-light: #777;
+}
+
+/* 
+:root {
+    --green-color: #72795B;
+
+    --brown-color: #865E3E;
+
+    --beige-color: #E3D4B4;
+
+    --blue-color: #4A7390;
+
+    --white-color: #FFF;
+
+    --orange-color: #E56110;
+
+} */
+
 
 html,
 body {
@@ -10,5 +35,13 @@ body {
     flex-direction: column;
     /* background-color: #72795B; */
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

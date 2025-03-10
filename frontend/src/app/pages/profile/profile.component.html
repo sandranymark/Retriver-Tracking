@@ -1,1 +1,139 @@
-<h1>EMPTY SHIT</h1>
+<!-- <section class="profile-container" role="region" aria-labelledby="profile-header">
+    <article class="profile-header" id="profile-header">
+        <div class="profile-image-container">
+            <ng-container *ngIf="dogProfile.image; else noImage">
+                <img [src]="dogProfile.image" alt="picture of {{ dogProfile.name }}" class="dog-image">
+            </ng-container>
+            <ng-template #noImage>
+                <div class="default-image" role="img" aria-label="Ingen bild tillgänglig">
+                    <i class="fas fa-paw" aria-hidden="true"></i>
+                    <p>Ingen bild</p>
+                </div>
+            </ng-template>
+        </div>
+
+        <h1 class="dog-name">{{ dogProfile.name }}</h1>
+        <p class="dog-details">{{ dogProfile.breed }} , {{ dogProfile.age }}år</p>
+    </article>
+
+    <section class="training-history" role="region" aria-labelledby="training-history-header">
+        <h2 id="training-history-header"><i class="fas fa-chart-line" aria-hidden="true"></i> Träningsstatistik</h2>
+        <div class="stats-container">
+            <div class="stat-card">
+                <i class="fas fa-running"></i>
+                <p>Pass</p>
+                <span>23</span>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-dumbbell"></i>
+                <p>Intensitet</p>
+                <span>Hög</span>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-medal"></i>
+                <p>Framsteg</p>
+                <span>89%</span>
+            </div>
+        </div>
+    </section>
+ -->
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <img src="assets/img/flatcoatedRetriever1.jpg" alt="Dog" class="dog-profile-pic">
+        <h1>BigBoris</h1>
+    </div>
+
+    <!-- 
+    <div class="profile-card">
+        <nav class="profile__card-icons">
+            <span class="profile__card-icons-flex">
+                <mat-icon matTooltip="Edit" matTooltipPosition="above" matTooltipShowDelay="500"
+                    matTooltipHideDelay="200">
+                    edit
+                </mat-icon>
+
+       
+            </span>
+        </nav> -->
+
+    <!-- <h2 class="profile__sub-heading">Test test test test <mat-icon>arrow_forward_ios</mat-icon></h2> -->
+    <!-- <ul>
+            <li class="list-info"><strong>Namn:</strong> Almanza Grabs Your Attention</li>
+            <div class="small-line"></div>
+            <li class="list-info"><strong>Ras:</strong> Flatcoated Retriever</li>
+            <div class="small-line"></div>
+            <li class="list-info"><strong>Född:</strong> Juni 11, 2021</li>
+            <div class="small-line"></div>
+            <li class="list-info"><strong>Kön:</strong> Hane</li>
+        </ul>
+    </div> -->
+
+    <div class="profile-card">
+        <nav class="profile__card-icons">
+            <span class="profile__card-icons-flex">
+                <mat-icon matTooltip="Edit" matTooltipPosition="above" (click)="toggleEditMode()">
+                    edit
+                </mat-icon>
+            </span>
+        </nav>
+
+        <ul>
+            <li class="list-info" *ngFor="let field of profileFields">
+                <div class="label-container">
+                    <strong>{{ field.label }}:</strong>
+                </div>
+                <div class="input-container">
+                    <span *ngIf="!editMode">{{ dogProfile[field.key] }}</span>
+                    <mat-form-field *ngIf="editMode" appearance="outline">
+                        <input matInput [(ngModel)]="dogProfile[field.key]">
+                    </mat-form-field>
+                </div>
+            </li>
+
+
+
+            <!-- Knappgrupp: Spara & Avbryt -->
+            <div class="button-group" *ngIf="editMode">
+                <button mat-raised-button color="primary" (click)="saveChanges()">
+                    <mat-icon>check</mat-icon> Spara
+                </button>
+                <button mat-raised-button color="warn" (click)="cancelEdit()">
+                    <mat-icon>close</mat-icon> Avbryt
+                </button>
+            </div>
+        </ul>
+    </div>
+
+
+
+    <!-- Health Tracking -->
+    <div class="health-tracking">
+        <h2>How is Boris today?</h2>
+        <div class="progress">
+            <p>Meals</p>
+            <div class="progress-bar">
+                <div class="progress-fill meals"></div>
+            </div>
+        </div>
+        <div class="progress">
+            <p>Routine Walk</p>
+            <div class="progress-bar">
+                <div class="progress-fill walk"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="btn">Nutrition</button>
+            <button class="btn">Medication</button>
+        </div>
+    </div>
+
+    <!-- Weight Tracking -->
+    <div class="weight-tracking">
+        <h2>Track Bailey's weight</h2>
+        <p class="weight-value">28.09 kg</p>
+        <button class="btn">+ Add weight</button>
+    </div>
+
+
+</div>

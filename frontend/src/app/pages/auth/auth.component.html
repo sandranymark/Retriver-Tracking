@@ -1,10 +1,10 @@
 <section class="Login__section">
     <div class="auth-container">
         @if (!isRegistering) {
-        <h2>Logga in</h2>
+        <h1>Logga in</h1>
         <form class="login__form">
-            <input type="text" placeholder="Användarnamn" required>
-            <input type="password" placeholder="Lösenord" required>
+            <input type="text" placeholder="Användarnamn" required aria-label="Användarnamn">
+            <input type="password" placeholder="Lösenord" required aria-label="Användarnamn">
             <button type="submit">Logga in</button>
         </form>
         <p class="toggle-text" (click)="toggleForm()">Har du inget konto? <span class="register__span">Registrera

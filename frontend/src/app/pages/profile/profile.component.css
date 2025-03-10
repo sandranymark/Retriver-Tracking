@@ -1,0 +1,400 @@
+/* .wrapper {}
+
+.profile-container {
+    background: var(--background-gradient);
+    padding: 20px;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: var(--text-color);
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-image-container {
+    display: flex;
+    justify-content: center;
+}
+
+.dog-image {
+    width: 130px;
+    height: 130px;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    transition: transform 0.3s;
+}
+
+.dog-image:hover {
+    transform: scale(1.05);
+}
+
+.default-image {
+    width: 130px;
+    height: 130px;
+    border-radius: var(--border-radius);
+    background: var(--glass-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--contrast-color);
+}
+
+.dog-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.dog-details {
+    font-size: 16px;
+    color: var(--contrast-color);
+    padding: 0;
+    margin: 0;
+}
+
+.training-history h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 12px;
+}
+
+.stat-card {
+    background: var(--glass-bg);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    width: 100px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card i {
+    font-size: 22px;
+    color: var(--secondary-color);
+}
+
+.stat-card p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.stat-card span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.edit-profile-btn {
+    background: var(--secondary-color);
+    color: var(--contrast-color);
+    border: none;
+    padding: 14px 22px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.edit-profile-btn:hover {
+    transform: scale(1.05);
+} */
+
+/* Färger */
+
+
+
+/* Container */
+.container {
+    background-color: var(--bg-light-blue);
+
+
+    padding: 20px;
+    height: 100%;
+    margin-bottom: 2rem;
+}
+
+/* Header */
+.header {
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.header h1 {
+    font-size: 20px;
+    color: var(--text-dark);
+}
+
+.dog-profile-pic {
+    width: 120px;
+    border-radius: 50%;
+}
+
+/* Profilkort */
+.profile-card,
+.health-tracking,
+.weight-tracking {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card h2,
+.health-tracking h2,
+.weight-tracking h2 {
+    font-size: 18px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.profile-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-card ul li {
+    color: var(--text-light);
+    padding: 3px 0;
+}
+
+/* Progress bars */
+.progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    width: 60%;
+    height: 6px;
+    background: #ddd;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 3px;
+}
+
+.meals {
+    width: 75%;
+    background: var(--primary-color);
+}
+
+.walk {
+    width: 100%;
+    background: var(--primary-color);
+}
+
+/* Knappdesign */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #e07b3a;
+}
+
+/* Vikt tracking */
+.weight-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+
+img .flat {
+    border-radius: 50%;
+}
+
+.small-line {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+    margin: 10px 0;
+}
+
+.profile__sub-heading {
+    background-color: #93ffb983;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile__card-icons {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.profile__card-icons-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+}
+
+.profile__card-icons-flex p {
+    margin: 0;
+    font-size: 14px;
+
+    /* .profile__card-icons-flex .icon__add {
+    font-weight: 700;
+    font-size: 1.5rem;
+*/
+}
+
+.profile__card-icons mat-icon {
+    width: 100%;
+    height: 100%;
+}
+
+ul {
+    margin: 0;
+}
+
+.list-info li {
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.profile-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+/* Edit-knapp */
+.profile__card-icons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.profile__card-icons-flex {
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.profile__card-icons-flex:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Lista */
+.list-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.label-container {
+    flex: 1;
+    font-weight: 600;
+    color: #333;
+}
+
+.input-container {
+    flex: 2;
+    text-align: right;
+}
+
+.input-container mat-form-field {
+    width: 100%;
+}
+
+/* Små linjer */
+.small-line {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+    margin: 10px 0;
+}
+
+/* Knappdesign */
+.button-group {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+button mat-icon {
+    margin-right: 6px;
+}

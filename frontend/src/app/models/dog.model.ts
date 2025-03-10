@@ -1,7 +1,10 @@
 export interface Dog {
     id: string;
+    sex: string;
     name: string;
+    nickname: string;
     breed: string;
     age: number;
-    imageUrl?: string;
+    image?: string;
+    trainingHistory: string[];
 }

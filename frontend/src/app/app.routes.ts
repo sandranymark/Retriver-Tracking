@@ -7,7 +7,8 @@ import { HistoryComponent } from './pages/history/history.component';
 
 
 export const routes: Routes = [
-    { path: '', component: AppComponent },
+    { path: '', redirectTo: 'auth', pathMatch: 'full' },
+    // { path: '', component: AppComponent },
     { path: 'home', component: HomeComponent },
     { path: 'auth', component: AuthComponent },
     { path: 'profile', component: ProfileComponent },
