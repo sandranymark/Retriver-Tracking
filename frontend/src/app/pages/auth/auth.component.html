@@ -1,4 +1,4 @@
-<section class="Login__section">
+<!-- <section class="Login__section">
     <div class="auth-container">
         @if (!isRegistering) {
         <h1>Logga in</h1>
@@ -20,5 +20,36 @@
         </form>
         <p class="toggle-text" (click)="toggleForm()">Har du redan ett konto? <span>Logga in</span></p>
         }
+    </div>
+</section> -->
+
+
+<section class="Login__section">
+    <div class="auth-container">
+        <!-- 🔹 Notis för lyckad registrering -->
+        <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+
+        <h1 *ngIf="!isRegistering">Logga in</h1>
+        <h2 *ngIf="isRegistering">Registrera dig</h2>
+
+        <!-- 🔹 Inloggningsformulär -->
+        <form class="login__form" *ngIf="!isRegistering" (ngSubmit)="login()">
+            <input type="email" [(ngModel)]="email" name="email" placeholder="E-post" required>
+            <input type="password" [(ngModel)]="password" name="password" placeholder="Lösenord" required>
+            <button type="submit">Logga in</button>
+        </form>
+
+        <!-- 🔹 Registreringsformulär -->
+        <form class="login__form" *ngIf="isRegistering" (ngSubmit)="register()">
+            <input type="text" [(ngModel)]="username" name="username" placeholder="Användarnamn" required>
+            <input type="email" [(ngModel)]="email" name="email" placeholder="E-post" required>
+            <input type="password" [(ngModel)]="password" name="password" placeholder="Lösenord" required>
+            <button type="submit">Registrera</button>
+        </form>
+
+        <!-- 🔹 Byt mellan login/registrering -->
+        <p class="toggle-text" (click)="toggleForm()">
+            {{ isRegistering ? 'Har du redan ett konto? Logga in' : 'Har du inget konto? Registrera dig' }}
+        </p>
     </div>
 </section>

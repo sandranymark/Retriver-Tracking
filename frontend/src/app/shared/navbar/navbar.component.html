@@ -1,21 +1,28 @@
-<nav class="bottom-nav">
-    <a routerLink="/home" routerLinkActive="active">
-        <mat-icon>home</mat-icon>
-        <span>Hem</span>
-    </a>
+<!-- Hamburgermeny (vänster) -->
+<button class="hamburger-menu" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+</button>
 
-    <a routerLink="/tracking" routerLinkActive="active">
+<!-- Sidomeny som öppnas -->
+<nav class="side-menu" [class.open]="menuOpen">
+    <button class="close-menu" (click)="toggleMenu()">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <a routerLink="/tracking" routerLinkActive="active" (click)="closeMenu()">
         <mat-icon>sports_baseball</mat-icon>
         <span>Träning</span>
     </a>
 
-    <a routerLink="/history" routerLinkActive="active">
+    <a routerLink="/history" routerLinkActive="active" (click)="closeMenu()">
         <mat-icon>history</mat-icon>
         <span>Historik</span>
     </a>
-
-    <a routerLink="/profile" routerLinkActive="active">
+    <a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">
         <mat-icon>account_circle</mat-icon>
         <span>Profil</span>
+    </a>
+    <a (click)="logout()" class="logout">
+        <span>Logga ut</span>
     </a>
 </nav>

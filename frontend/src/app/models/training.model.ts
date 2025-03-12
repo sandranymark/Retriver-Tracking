@@ -1,10 +1,10 @@
 export interface Training {
-    id: string;
+    id?: string;
     dogId: string;
-    date: Date;
+    date?: Date;
     type: 'Landapport' | 'Vattenapport' | 'Dirigering' | 'Annat';
     notes: string;
-    rating: number; // stars 1-5
+    rating: number;
 }
 
 export interface TrainingSession {

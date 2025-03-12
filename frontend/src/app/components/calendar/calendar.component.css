@@ -2,6 +2,7 @@
     max-width: 900px;
     margin: 20px auto;
     height: 100vh;
+
 }
 
 
@@ -80,13 +81,6 @@
 }
 
 
-
-
-
-
-
-
-/* Anpassa för mindre skärmar, t.ex. iPhone SE (375px bred) */
 @media screen and (max-width: 400px) {
     .calendar-container {
         max-width: 100%;

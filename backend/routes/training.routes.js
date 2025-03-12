@@ -1,28 +1,16 @@
-const express = require('express')
-const router = express.router()
+import express from "express";
+import { createTraining, getTrainingsByDog, deleteTraining } from "../controllers/training.controller.js";
+import { authenticateUser } from "../middleware/auth.middleware.js";
 
-//Getting all
-router.get('/', (req, res) => {
-    res.send('hello world')
-})
+const router = express.Router();
 
-//Getting one
-router.get('/:id', (req, res) => {
+// 🔹 Skapa ett träningspass
+router.post("/", authenticateUser, createTraining);
 
-})
-//Creating new
-router.post('/', (req, res) => {
+// 🔹 Hämta träningspass för en specifik hund
+router.get("/:dogId", authenticateUser, getTrainingsByDog);
 
-})
+// 🔹 Ta bort ett träningspass
+router.delete("/:id", authenticateUser, deleteTraining);
 
-//Updating one
-router.patch('/:id', (req, res) => {
-
-})
-
-//Deleteing one
-router.delete('/:id', (req, res) => {
-
-})
-
-module.exports = router;
+export default router;

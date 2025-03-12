@@ -1,20 +1,14 @@
-const Joi = require("joi");
+import Joi from "joi";
 
-const registerValidation = (data) => {
-    const schema = Joi.object({
-        name: Joi.string().min(3).required(),
-        email: Joi.string().email().required(),
-        password: Joi.string().min(6).required(),
-    });
-    return schema.validate(data);
-};
+// Validering för registrering
+export const registerValidation = Joi.object({
+    username: Joi.string().min(3).max(30).required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required()
+});
 
-const loginValidation = (data) => {
-    const schema = Joi.object({
-        email: Joi.string().email().required(),
-        password: Joi.string().min(6).required(),
-    });
-    return schema.validate(data);
-};
-
-module.exports = { registerValidation, loginValidation };
+// Validering för inloggning
+export const loginValidation = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required()
+});

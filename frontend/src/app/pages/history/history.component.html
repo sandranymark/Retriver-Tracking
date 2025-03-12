@@ -1,1 +1,15 @@
-<app-calendar />
+<h2>Träningshistorik</h2>
+
+
+<ul *ngIf="recentSessions.length > 0; else noTrainings">
+    <li *ngFor="let session of recentSessions; trackBy: trackByDate">
+        <strong>{{ session.date }}:</strong> {{ session.title }} - {{ session.details }}
+    </li>
+</ul>
+
+<ng-template #noTrainings>
+    <p>Inga träningspass registrerade ännu!</p>
+</ng-template>
+
+
+<app-calendar [recentSessions]="recentSessions"></app-calendar>

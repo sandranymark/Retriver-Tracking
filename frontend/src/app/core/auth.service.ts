@@ -1,29 +1,54 @@
 import { Injectable, signal } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    isAuthenticated = signal<boolean>(false); // Signal som håller koll på inloggningsstatus
+    private apiUrl = 'api/auth';
 
-    constructor() { }
+    // Signal för att hålla koll på om användaren är inloggad
+    isAuthenticated = signal<boolean>(!!localStorage.getItem('authToken'));
+    userToken = signal<string | null>(localStorage.getItem('authToken'));
 
-    // 🏷️ Simulerad login (ingen backend)
-    login(email: string, password: string): Observable<boolean> {
-        console.log(`🔹 Fake login för ${email}`);
-        return of(true).pipe(delay(500)); // Simulerar serverfördröjning
+    constructor(private http: HttpClient) { }
+
+    // Registrera en användare
+    register(userData: any): Observable<any> {
+        return this.http.post(`${this.apiUrl}/register`, userData);
     }
 
-    // 🏷️ Simulerad registrering (ingen backend)
-    register(name: string, email: string, password: string): Observable<boolean> {
-        console.log(`🔹 Fake register för ${name} (${email})`);
-        return of(true).pipe(delay(500));
+    // Logga in en användare
+    login(credentials: any): Observable<any> {
+        return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+            tap((res: any) => {
+                this.setToken(res.token);
+            })
+        );
     }
 
-    // 🏷️ Simulerad logout
-    logout() {
-        console.log(`🔹 Fake logout`);
+    // Spara token och uppdatera Signal
+    setToken(token: string): void {
+        localStorage.setItem('authToken', token);
+        this.userToken.set(token);
+        this.isAuthenticated.set(true);
+    }
+
+    // Hämta token
+    getToken(): string | null {
+        return this.userToken();
+    }
+
+    //  Kolla om användaren är inloggad
+    isLoggedIn(): boolean {
+        return this.isAuthenticated();
+    }
+
+    //  Logga ut användaren
+    logout(): void {
+        localStorage.removeItem('authToken');
+        this.userToken.set(null);
         this.isAuthenticated.set(false);
     }
 }
