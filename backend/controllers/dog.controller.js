@@ -1,7 +1,7 @@
 import Dog from "../models/Dog.model.js";
 import { dogValidation } from "../validation/dog.validation.js";
 
-// 🔹 Skapa en hund
+// Skapa en hund
 export const createDog = async (req, res) => {
     try {
         const { error } = dogValidation.validate(req.body);
@@ -19,7 +19,7 @@ export const createDog = async (req, res) => {
     }
 };
 
-// 🔹 Hämta alla hundar för inloggad användare (inklusive träningshistorik)
+// Hämta alla hundar för inloggad användare (inklusive träningshistorik)
 export const getDogsByUser = async (req, res) => {
     try {
         const dogs = await Dog.find({ owner: req.user.userId }).populate("trainingHistory");
@@ -29,7 +29,7 @@ export const getDogsByUser = async (req, res) => {
     }
 };
 
-// 🔹 Hämta en specifik hund
+// Hämta en specifik hund
 export const getDogById = async (req, res) => {
     try {
         const dog = await Dog.findOne({ _id: req.params.id, owner: req.user.userId }).populate("trainingHistory");
@@ -40,25 +40,29 @@ export const getDogById = async (req, res) => {
     }
 };
 
-// 🔹 Uppdatera en hundprofil
+//  Uppdatera en hund
 export const updateDog = async (req, res) => {
     try {
-        const { error } = dogValidation.validate(req.body);
-        if (error) return res.status(400).json({ error: error.details[0].message });
+        const { error } = dogValidation.validate(req.body, { abortEarly: false, allowUnknown: true });
+        if (error) return res.status(400).json({ error: error.details.map(detail => detail.message) });
 
         const updatedDog = await Dog.findOneAndUpdate(
             { _id: req.params.id, owner: req.user.userId },
-            req.body,
-            { new: true }
+            { $set: req.body }, // Uppdaterar endast de fält som skickas
+            { new: true, runValidators: true }
         );
+
         if (!updatedDog) return res.status(404).json({ error: "Dog not found" });
+
         res.json({ message: "Dog profile updated!", dog: updatedDog });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
 
-// 🔹 Ta bort en hund
+
+
+// Ta bort en hund
 export const deleteDog = async (req, res) => {
     try {
         const deletedDog = await Dog.findOneAndDelete({ _id: req.params.id, owner: req.user.userId });

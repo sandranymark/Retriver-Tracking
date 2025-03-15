@@ -45,3 +45,11 @@ body {
     margin: 0;
     font-family: poppins, sans-serif;
 }
+
+.mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+    /* 🔥 DÖDAR den helt */
+    height: 0px !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
