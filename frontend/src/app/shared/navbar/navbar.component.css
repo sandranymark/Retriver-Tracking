@@ -3,7 +3,8 @@
     height: 40px;
     border: none;
     border-radius: 50%;
-    background-color: pink;
+    background-color: #ff8c42;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;

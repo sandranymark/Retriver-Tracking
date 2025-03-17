@@ -2,69 +2,7 @@
 
 
 
-    <!-- <select class="fitt__select" (change)="selectDog($event)">
-        <option *ngFor="let dog of dogs" [value]="dog._id" [selected]="dog._id === activeDog?._id">
-            {{ dog.nickname }}
-        </option>
-    </select>
-  -->
-
-
-
-
-
     <!-- Modal för att lägga till en ny hund -->
-    <div *ngIf="showAddDogModal" class="modal">
-        <div class="modal-content">
-            <span class="close" (click)="closeAddDogModal()">&times;</span>
-            <h2>Lägg till en ny hund</h2>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Namn</mat-label>
-                <input matInput [(ngModel)]="newDog.name">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Smeknamn</mat-label>
-                <input matInput [(ngModel)]="newDog.nickname">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Ras</mat-label>
-                <input matInput [(ngModel)]="newDog.breed">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Ålder</mat-label>
-                <input matInput type="number" [(ngModel)]="newDog.age">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Kön</mat-label>
-                <mat-select [(ngModel)]="newDog.sex">
-                    <mat-option value="male">Hane</mat-option>
-                    <mat-option value="female">Tik</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Bild-URL</mat-label>
-                <input matInput [(ngModel)]="newDog.image">
-            </mat-form-field>
-
-            <div class="button-group">
-                <button mat-raised-button color="primary" (click)="addDog()">
-                    <mat-icon>check</mat-icon> Spara
-                </button>
-                <button mat-raised-button color="warn" (click)="closeAddDogModal()">
-                    <mat-icon>close</mat-icon> Avbryt
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-
 
 
 
@@ -73,20 +11,10 @@
 
     <div class="header" *ngIf="activeDog">
         <img [src]="activeDog.image" [alt]="activeDog.name" class="dog-profile-pic">
-        <h1>{{ activeDog.nickname }}</h1>
-    </div>
-
-
-    <div class="select__btns">
-        <!-- Knapp för att lägga till en ny hund -->
-        <button class="btn__add" (click)="openAddDogModal()">
-            <mat-icon>add</mat-icon>
-        </button>
-
-        <!-- Hundväljare-komponenten -->
+        <!-- <h1>{{ activeDog.nickname }}</h1> -->
         <form class="select__dog-form" [formGroup]="dogForm">
-            <mat-form-field appearance="outline" class="no-outline">
-                <mat-label>Välj hund</mat-label>
+            <mat-form-field appearance="outline" class="no-outline" matTooltip="Välj en hund"
+                matTooltipPosition="right">
                 <mat-select formControlName="selectedDog" (selectionChange)="selectDog($event.value)">
                     <mat-option *ngFor="let dog of dogs" [value]="dog._id">
                         {{ dog.nickname }}
@@ -94,11 +22,15 @@
                 </mat-select>
             </mat-form-field>
         </form>
-
-
-
     </div>
 
+
+    <!-- Knapp för att lägga till en ny hund -->
+    <!-- <div class="select__btns">
+        <button class="btn__add" (click)="openAddDogModal()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div> -->
 
 
     <!-- Profilkort -->
@@ -136,31 +68,93 @@
         </ul>
     </div>
 
+    <!-- Add new dog (if you have more then one) -->
+    <button class="add-dog" (click)="openAddDogModal()" matTooltip="Lägg till hund" matTooltipPosition="right">Lägg till
+        hund</button>
+
+    <div *ngIf="showAddDogModal" class="modal">
+        <div class="modal-content">
+            <span class="close" (click)="closeAddDogModal()">&times;</span>
+            <h2 class="modal-heading">Lägg till en ny hund</h2>
+
+            <form (ngSubmit)="addDog()" #dogForm="ngForm">
+                <mat-form-field class="margin-bottom" appearance="outline">
+                    <mat-label>Namn</mat-label>
+                    <input matInput [(ngModel)]="newDog.name" name="name" required>
+                </mat-form-field>
+
+                <mat-form-field class="margin-bottom" appearance="outline">
+                    <mat-label>Smeknamn</mat-label>
+                    <input matInput [(ngModel)]="newDog.nickname" name="nickname">
+                </mat-form-field>
+
+                <mat-form-field class="margin-bottom" appearance="outline">
+                    <mat-label>Ras</mat-label>
+                    <input matInput [(ngModel)]="newDog.breed" name="breed" required>
+                </mat-form-field>
+
+                <mat-form-field class="margin-bottom" appearance="outline">
+                    <mat-label>Ålder</mat-label>
+                    <input matInput type="number" [(ngModel)]="newDog.age" name="age" required>
+                </mat-form-field>
+
+                <mat-form-field class="margin-bottom" appearance="outline">
+                    <mat-label>Kön</mat-label>
+                    <mat-select class="font-size" [(ngModel)]="newDog.sex" name="sex" required>
+                        <mat-option value="male">Hane</mat-option>
+                        <mat-option value="female">Tik</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Bild-URL</mat-label>
+                    <input matInput [(ngModel)]="newDog.image" name="image">
+                </mat-form-field>
+
+                <div class="button-group">
+                    <button mat-raised-button color="primary" type="submit">
+                        <mat-icon>check</mat-icon> Spara
+                    </button>
+                    <button mat-raised-button color="warn" type="button" (click)="closeAddDogModal()">
+                        <mat-icon>close</mat-icon> Avbryt
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
     <!-- Health Tracking -->
     <div class="health-tracking">
-        <h2>Hur mår {{ activeDog?.nickname }} idag?</h2>
+        <h2>{{ activeDog?.nickname }}s senaste träningspass</h2>
         <div class="progress">
-            <p>Meals</p>
+            <p>Taggad</p>
             <div class="progress-bar">
                 <div class="progress-fill meals"></div>
             </div>
         </div>
         <div class="progress">
-            <p>Routine Walk</p>
+            <p>som fan</p>
             <div class="progress-bar">
                 <div class="progress-fill walk"></div>
             </div>
         </div>
         <div class="buttons">
-            <button class="btn">Nutrition</button>
-            <button class="btn">Medication</button>
+            <button class="btn">knapp</button>
+            <button class="btn">knapp</button>
         </div>
     </div>
 
     <!-- Weight Tracking -->
-    <div class="weight-tracking">
+    <div class="profile-card weight-tracking">
         <h2>Spåra {{ activeDog?.nickname }}s vikt</h2>
-        <p class="weight-value">28.09 kg</p>
+        <h3 class="weight-value">28.09 kg</h3>
         <button class="btn">+ Lägg till vikt</button>
     </div>
+
+
 </div>

@@ -8,32 +8,15 @@
     --text-light: #777;
 }
 
-/* 
-:root {
-    --green-color: #72795B;
-
-    --brown-color: #865E3E;
-
-    --beige-color: #E3D4B4;
-
-    --blue-color: #4A7390;
-
-    --white-color: #FFF;
-
-    --orange-color: #E56110;
-
-} */
-
 
 html,
 body {
     box-sizing: border-box;
     height: 100vh;
     margin: 0;
-    font-family: Poppins, sans-serif;
+    font-family: Poppins, sans-serif !important;
     display: flex;
     flex-direction: column;
-    /* background-color: #72795B; */
 }
 
 html,
@@ -41,14 +24,8 @@ body {
     height: 100%;
 }
 
-body {
-    margin: 0;
-    font-family: poppins, sans-serif;
-}
-
 .mat-mdc-form-field-subscript-wrapper {
     display: none !important;
-    /* 🔥 DÖDAR den helt */
     height: 0px !important;
     padding: 0px !important;
     margin: 0px !important;

@@ -1,12 +1,16 @@
 .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: #6F7E5B; */
     background-color: var(--bg-light-blue);
+    /* background-color: #364943; */
+    /* background-color: #72795B; */
     padding: 20px;
     height: 100%;
 }
 
 .header {
-    padding: 20px;
-    text-align: center;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -14,21 +18,23 @@
     flex-direction: column;
 }
 
-.header h1 {
-    font-size: 20px;
-    color: var(--text-dark);
-}
 
 .dog-profile-pic {
-    width: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
+    border: 5px solid whitesmoke;
+    box-shadow: 0px 0px 15px rgba(5, 5, 5, 0.7);
+    object-fit: cover;
+    /* object-position: center; */
+    object-position: calc(50% - -10px) calc(50%);
 }
 
 /* Profilkort */
 .profile-card,
 .health-tracking,
 .weight-tracking {
-    background: white;
+    background: whitesmoke;
     padding: 15px;
     border-radius: 12px;
     margin-bottom: 15px;
@@ -113,9 +119,7 @@
 }
 
 
-img .flat {
-    border-radius: 50%;
-}
+
 
 .small-line {
     width: 100%;
@@ -124,13 +128,13 @@ img .flat {
     margin: 10px 0;
 }
 
-.profile__sub-heading {
+/* .profile__sub-heading {
     background-color: #93ffb983;
     padding: 15px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
-}
+} */
 
 .profile__card-icons {
     display: flex;
@@ -281,4 +285,100 @@ ul {
 .mat-mdc-form-field-infix {
     width: 100%;
 
+}
+
+
+mat-select {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+mat-option {
+    color: black;
+    font-weight: 700;
+}
+
+.add-dog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+    margin-bottom: 15px;
+
+}
+
+
+
+
+
+
+/* Bakgrund för modalen */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* Innehåll i modalen */
+.modal-content {
+    background: rgba(255, 255, 255, 0.846);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Stäng-knappen */
+.close {
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #666;
+}
+
+
+/* Knappgrupp */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Knappar */
+button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.margin-bottom {
+    margin-bottom: 0.5rem;
+}
+
+.font-size {
+    font-size: 16px !important;
+    font-weight: 400;
+}
+
+.modal-heading {
+    font-size: 1.2rem;
 }

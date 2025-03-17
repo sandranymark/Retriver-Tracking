@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
   showAddDogModal = false;
   dogForm!: FormGroup;
 
+
   dogs: Dog[] = [];
   activeDog: Dog | null = null;
   originalProfile: Dog | null = null;
