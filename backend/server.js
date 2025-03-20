@@ -10,6 +10,7 @@ dotenv.config(); // Hämtar .env filen
 
 const app = express();
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
 const PORT = process.env.PORT || 5000;
 

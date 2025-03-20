@@ -1,8 +1,8 @@
 export interface Training {
-    id?: string;
+    _id?: string;
     dogId: string;
-    date?: Date;
-    type: 'Landapport' | 'Vattenapport' | 'Dirigering' | 'Annat';
+    date?: string;
+    type: 'Markering' | 'Sök' | 'Dirigering' | 'Vattenapport' | 'Jaktlydnad' | 'Annat';
     notes: string;
     rating: number;
 }

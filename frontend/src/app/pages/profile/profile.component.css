@@ -2,10 +2,9 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    /* background-color: #13232E; */
+    background-color: #2F4858;
     /* background-color: #6F7E5B; */
-    background-color: var(--bg-light-blue);
-    /* background-color: #364943; */
-    /* background-color: #72795B; */
     padding: 20px;
     height: 100%;
 }
@@ -18,34 +17,37 @@
     flex-direction: column;
 }
 
-
 .dog-profile-pic {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    border: 5px solid whitesmoke;
+    border: 5px solid white;
     box-shadow: 0px 0px 15px rgba(5, 5, 5, 0.7);
     object-fit: cover;
-    /* object-position: center; */
-    object-position: calc(50% - -10px) calc(50%);
+    object-position: center;
+    /* object-position: calc(50% - -10px) calc(50%); */
 }
 
-/* Profilkort */
+
 .profile-card,
 .health-tracking,
 .weight-tracking {
-    background: whitesmoke;
+
+    background-color: white;
+    filter: drop-shadow(3px 3px 4px #000);
     padding: 15px;
     border-radius: 12px;
     margin-bottom: 15px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    color: black;
+
 }
 
 .profile-card h2,
 .health-tracking h2,
 .weight-tracking h2 {
     font-size: 18px;
-    color: var(--text-dark);
+    color: black;
     margin-bottom: 10px;
 }
 
@@ -55,8 +57,9 @@
 }
 
 .profile-card ul li {
-    color: var(--text-light);
     padding: 3px 0;
+    color: black;
+
 }
 
 /* Progress bars */
@@ -70,7 +73,7 @@
 .progress-bar {
     width: 60%;
     height: 6px;
-    background: #ddd;
+    background: #fbf9f9;
     border-radius: 3px;
     overflow: hidden;
 }
@@ -90,7 +93,6 @@
     background: var(--primary-color);
 }
 
-/* Knappdesign */
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -115,11 +117,8 @@
 .weight-value {
     font-size: 20px;
     font-weight: bold;
-    color: var(--text-dark);
+    color: white;
 }
-
-
-
 
 .small-line {
     width: 100%;
@@ -128,13 +127,6 @@
     margin: 10px 0;
 }
 
-/* .profile__sub-heading {
-    background-color: #93ffb983;
-    padding: 15px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-} */
 
 .profile__card-icons {
     display: flex;
@@ -147,17 +139,14 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 0 !important;
     font-size: 16px;
+
 }
 
 .profile__card-icons-flex p {
     margin: 0;
     font-size: 14px;
-
-    /* .profile__card-icons-flex .icon__add {
-    font-weight: 700;
-    font-size: 1.5rem;
-*/
 }
 
 .profile__card-icons mat-icon {
@@ -174,7 +163,10 @@ ul {
 }
 
 .profile-card {
-    background: white;
+    color: black;
+    /* background: #2C4959; */
+    background-color: white;
+    filter: drop-shadow(3px 3px 4px #050505);
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 15px;
@@ -200,7 +192,6 @@ ul {
     background: rgba(0, 0, 0, 0.1);
 }
 
-/* Lista */
 .list-info {
     display: flex;
     align-items: center;
@@ -212,7 +203,8 @@ ul {
 .label-container {
     flex: 1;
     font-weight: 600;
-    color: #333;
+    color: black;
+
 }
 
 .input-container {
@@ -224,7 +216,6 @@ ul {
     width: 100%;
 }
 
-/* Små linjer */
 .small-line {
     width: 100%;
     height: 1px;
@@ -232,14 +223,12 @@ ul {
     margin: 10px 0;
 }
 
-/* Knappdesign */
 .button-group {
     display: flex;
     gap: 12px;
     justify-content: flex-end;
     margin-top: 20px;
 }
-
 
 .btn__add {
     display: flex;
@@ -256,18 +245,15 @@ ul {
     transition: background 0.3s;
 }
 
-
-
 .select__btns {
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 ::ng-deep .no-outline .mdc-notched-outline {
-    display: none !important;
+    display: none;
 }
 
 .no-outline {
@@ -281,18 +267,18 @@ ul {
     margin-bottom: 1rem;
 }
 
-
 .mat-mdc-form-field-infix {
     width: 100%;
-
 }
-
 
 mat-select {
     text-align: center;
     font-size: 1.2rem;
     font-weight: 700;
+    color: white;
 }
+
+
 
 mat-option {
     color: black;
@@ -300,6 +286,7 @@ mat-option {
 }
 
 .add-dog {
+    font-weight: 700;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -312,15 +299,8 @@ mat-option {
     font-size: 14px;
     transition: background 0.3s;
     margin-bottom: 15px;
-
 }
 
-
-
-
-
-
-/* Bakgrund för modalen */
 .modal {
     position: fixed;
     top: 0;
@@ -331,21 +311,18 @@ mat-option {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
-/* Innehåll i modalen */
 .modal-content {
-    background: rgba(255, 255, 255, 0.846);
+    background: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); */
     width: 80%;
     max-width: 400px;
     text-align: center;
 }
 
-/* Stäng-knappen */
 .close {
     position: absolute;
     top: 70px;
@@ -355,19 +332,10 @@ mat-option {
     color: #666;
 }
 
-
-/* Knappgrupp */
 .button-group {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-}
-
-/* Knappar */
-button {
-    display: flex;
-    align-items: center;
-    gap: 6px;
 }
 
 .margin-bottom {
@@ -377,8 +345,45 @@ button {
 .font-size {
     font-size: 16px !important;
     font-weight: 400;
+    color: black;
+    text-align: left;
 }
 
 .modal-heading {
     font-size: 1.2rem;
+}
+
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.file-upload label {
+    display: block;
+    background: #ff8c42;
+    /* Primär färg */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+    max-width: 185px;
+}
+
+.file-input {
+    display: none;
+    /* Gömmer det fula standard file input */
+}
+
+.file-name {
+    margin-top: 8px;
+    font-size: 14px;
+    color: black;
+    text-align: center;
+    font-weight: 500;
 }

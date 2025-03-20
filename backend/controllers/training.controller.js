@@ -31,7 +31,7 @@ export const createTraining = async (req, res) => {
     }
 };
 
-//Hämta träningspass för en hund
+//Hämta träningspass för en hund (id)
 export const getTrainingsByDog = async (req, res) => {
     try {
         const trainings = await Training.find({ dog: req.params.dogId }).populate("dog");
@@ -41,7 +41,7 @@ export const getTrainingsByDog = async (req, res) => {
     }
 };
 
-// Ta bort ett träningspass
+// Tar bort ett träningspass (id)
 export const deleteTraining = async (req, res) => {
     try {
         const training = await Training.findByIdAndDelete(req.params.id);

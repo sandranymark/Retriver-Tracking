@@ -36,7 +36,8 @@ export class ProfileComponent implements OnInit {
   editMode = false;
   showAddDogModal = false;
   dogForm!: FormGroup;
-
+  selectedFile: File | null = null;
+  selectedFileName: string | null = null;
 
   dogs: Dog[] = [];
   activeDog: Dog | null = null;
@@ -55,7 +56,7 @@ export class ProfileComponent implements OnInit {
     breed: '',
     age: 0,
     sex: 'male',
-    image: ''
+
   };
 
 
@@ -64,7 +65,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.dogForm = this.fb.group({
-      selectedDog: [''] // Initiera med tom sträng eller en default-hund
+      selectedDog: ['']
     });
 
     this.loadDogs();
@@ -74,43 +75,40 @@ export class ProfileComponent implements OnInit {
   loadDogs() {
     this.dogProfileService.getAllDogs().subscribe({
       next: (dogs) => {
-        console.log("✅ Hundar hämtade:", dogs);
+        console.log("Hundar hämtade:", dogs);
         this.dogs = dogs;
 
         if (dogs.length > 0) {
-          this.dogForm.patchValue({ selectedDog: dogs[0]._id }); // ✅ Sätt första hunden som default
+          this.dogForm.patchValue({ selectedDog: dogs[0]._id }); // Sätt första hunden som default
           this.selectDog(dogs[0]._id);
         }
       },
-      error: (err) => console.error('❌ Error fetching dogs:', err)
+      error: (err) => console.error(' Error fetching dogs:', err)
     });
   }
 
 
   selectDog(selectedDogId: string) {
-    console.log("🔍 Vald hund ID:", selectedDogId);
     this.dogProfileService.setActiveDog(selectedDogId);
 
     this.dogProfileService.getActiveDog().subscribe({
       next: (dog) => {
         if (!dog) {
-          console.error("❌ Ingen hund hittades i API-svaret!");
+          console.error(" Ingen hund hittades i API-svaret!");
           return;
         }
-        console.log("✅ Hittade hund:", dog);
         this.activeDog = { ...dog };
         this.originalProfile = { ...dog };
       },
-      error: (err) => console.error('❌ Error fetching active dog:', err)
+      error: (err) => console.error('Error fetching active dog:', err)
     });
   }
 
 
   loadActiveDog() {
     const activeDogId = this.dogProfileService.getActiveDogId();
-
     if (!activeDogId) {
-      console.error("❌ Ingen aktiv hund sparad.");
+      console.error("Ingen aktiv hund sparad.");
       return;
     }
 
@@ -119,7 +117,7 @@ export class ProfileComponent implements OnInit {
         this.activeDog = dog;
         this.originalProfile = { ...dog! };
       },
-      error: (err) => console.error('❌ Error fetching active dog:', err)
+      error: (err) => console.error('Error fetching active dog:', err)
     });
   }
 
@@ -138,7 +136,7 @@ export class ProfileComponent implements OnInit {
         this.originalProfile = { ...this.activeDog! };
         this.editMode = false;
       },
-      error: (err) => console.error('❌ Error saving changes:', err)
+      error: (err) => console.error('Error saving Shitty changes:', err)
     });
   }
 
@@ -161,33 +159,58 @@ export class ProfileComponent implements OnInit {
       breed: '',
       age: 0,
       sex: 'male',
-      image: ''
+
     };
   }
 
+
+
   addDog() {
     if (!this.newDog.name || !this.newDog.breed || this.newDog.age === undefined) {
-      alert('Fyll i alla obligatoriska fält!');
+      alert('Fyll i alla fält!');
       return;
     }
 
-    this.dogProfileService.addDog(this.newDog as Dog).subscribe({
-      next: (newDog) => {
-        console.log("✅ Ny hund tillagd:", newDog);
+    const formData = new FormData();
+    formData.append("name", this.newDog.name!);
+    formData.append("nickname", this.newDog.nickname || '');
+    formData.append("breed", this.newDog.breed!);
+    formData.append("age", this.newDog.age.toString());
+    formData.append("sex", this.newDog.sex!);
 
-        // 🔹 Stäng modalen OMEDELBART
-        this.closeAddDogModal();
-
-        // 🔹 Uppdatera hundlistan
+    if (this.selectedFile) {
+      formData.append("image", this.selectedFile);
+    }
+    this.closeAddDogModal();
+    this.dogProfileService.addDog(formData).subscribe({
+      next: (response) => {
+        console.log("Ny hundJÄVEL tillagd:", response.dog);
         this.loadDogs();
-
-        // 🔹 Välj den nya hunden automatiskt
-        this.selectDog(newDog._id);
       },
-      error: (err) => console.error('❌ Error adding dog:', err)
+      error: (err) => console.error('Error adding dog:', err)
     });
+
+
+
   }
 
+
+  // Metod för att hantera filval
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      this.selectedFileName = this.selectedFile.name;
+    }
+  }
+
+
+  getDogImage(imagePath: string | undefined): string {
+    if (!imagePath) {
+      return 'assets/img/flatcoatedRetriever3.jpg'; // Dummybild om ingen finns
+    }
+    return `http://localhost:8181/${imagePath}`; // Se till att backend exponerar /uploads/
+  }
 
 
 

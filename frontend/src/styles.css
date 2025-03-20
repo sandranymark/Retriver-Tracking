@@ -30,3 +30,16 @@ body {
     padding: 0px !important;
     margin: 0px !important;
 }
+
+.mat-mdc-dialog-surface {
+    background-color: transparent !important;
+}
+
+.mat-mdc-select-arrow svg {
+    fill: white !important;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+    background-color: #2F4858 !important;
+    color: white !important;
+}

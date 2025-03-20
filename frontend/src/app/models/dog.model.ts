@@ -5,6 +5,6 @@ export interface Dog {
     nickname: string;
     breed: string;
     age: number;
-    image?: string;
+    imageUrl?: string;
     trainingHistory: string[];
 }

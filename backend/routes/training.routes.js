@@ -4,13 +4,13 @@ import { authenticateUser } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-// 🔹 Skapa ett träningspass
+// Skapar ett träningspass
 router.post("/", authenticateUser, createTraining);
 
-// 🔹 Hämta träningspass för en specifik hund
+// Hämtar träningspass för en specifik hund (id)
 router.get("/:dogId", authenticateUser, getTrainingsByDog);
 
-// 🔹 Ta bort ett träningspass
+// Ta bort ett träningspass
 router.delete("/:id", authenticateUser, deleteTraining);
 
 export default router;

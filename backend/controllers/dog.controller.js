@@ -1,25 +1,25 @@
 import Dog from "../models/Dog.model.js";
 import { dogValidation } from "../validation/dog.validation.js";
 
-// Skapa en hund
+// Multer storage setup
+
+// Skapar en ny hundprofil på den inloggade användaren
 export const createDog = async (req, res) => {
-    try {
-        const { error } = dogValidation.validate(req.body);
-        if (error) return res.status(400).json({ error: error.details[0].message });
+    const { error } = dogValidation.validate(req.body);
+    if (error) return res.status(400).json({ error: error.details[0].message });
 
-        const newDog = new Dog({
-            ...req.body,
-            owner: req.user.userId
-        });
-        await newDog.save();
+    const newDog = new Dog({
+        ...req.body,
+        owner: req.user.userId,
+        imageUrl: `uploads/${req.file.filename}`
+    });
 
-        res.status(201).json({ message: "Dog profile created!", dog: newDog });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+    await newDog.save();
+
+    res.status(201).json({ message: "Dog profile created!", dog: newDog });
 };
 
-// Hämta alla hundar för inloggad användare (inklusive träningshistorik)
+// Hämtar alla hundar för inloggad användare (inklusive träningshistorik)
 export const getDogsByUser = async (req, res) => {
     try {
         const dogs = await Dog.find({ owner: req.user.userId }).populate("trainingHistory");
@@ -29,7 +29,7 @@ export const getDogsByUser = async (req, res) => {
     }
 };
 
-// Hämta en specifik hund
+// Hämtar en specifik hund (id)
 export const getDogById = async (req, res) => {
     try {
         const dog = await Dog.findOne({ _id: req.params.id, owner: req.user.userId }).populate("trainingHistory");
@@ -40,7 +40,7 @@ export const getDogById = async (req, res) => {
     }
 };
 
-//  Uppdatera en hund
+//  Uppdaterar en hundprofil
 export const updateDog = async (req, res) => {
     try {
         const { error } = dogValidation.validate(req.body, { abortEarly: false, allowUnknown: true });
@@ -48,7 +48,7 @@ export const updateDog = async (req, res) => {
 
         const updatedDog = await Dog.findOneAndUpdate(
             { _id: req.params.id, owner: req.user.userId },
-            { $set: req.body }, // Uppdaterar endast de fält som skickas
+            { $set: req.body }, // Uppdaterar endast de fält som skickas med som ändringar
             { new: true, runValidators: true }
         );
 
@@ -62,7 +62,7 @@ export const updateDog = async (req, res) => {
 
 
 
-// Ta bort en hund
+// Ta bort en hundprofil/avliva...
 export const deleteDog = async (req, res) => {
     try {
         const deletedDog = await Dog.findOneAndDelete({ _id: req.params.id, owner: req.user.userId });

@@ -10,7 +10,7 @@ export const authenticateUser = (req, res, next) => {
         const verified = jwt.verify(token.replace("Bearer ", ""), process.env.JWT_SECRET);
         req.user = verified;
 
-        console.log("🔍 Token data:", req.user); // 👈 Logga EFTER att token verifierats!
+        console.log("🔍 Token data:", req.user);
 
         next();
     } catch (err) {

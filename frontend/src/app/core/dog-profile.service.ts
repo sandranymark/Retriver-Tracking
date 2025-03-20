@@ -40,15 +40,28 @@ export class DogProfileService {
     }
 
     // Lägg till en ny hund
-    addDog(dogData: Partial<Dog>): Observable<Dog> {
-        return this.http.post<Dog>(this.apiUrl, dogData, { headers: this.getAuthHeaders() });
+    // addDog(dogData: Partial<Dog>): Observable<Dog> {
+    //     return this.http.post<Dog>(this.apiUrl, dogData, { headers: this.getAuthHeaders() });
+    // }
+
+    // addDog(dogData: FormData): Observable<Dog> {
+    //     return this.http.post<Dog>(this.apiUrl, dogData, {
+    //         headers: this.getAuthHeaders().delete('Content-Type') // Låter browsern sätta rätt Content-Type
+    //     });
+    // }
+
+    addDog(dogData: FormData): Observable<{ dog: Dog }> {
+        return this.http.post<{ dog: Dog }>(this.apiUrl, dogData, {
+            headers: this.getAuthHeaders().delete('Content-Type')
+        });
     }
+
+
 
     updateDog(dogId: string, updatedDog: Partial<Dog>): Observable<any> {
         const headers = new HttpHeaders({ Authorization: `Bearer ${this.authService.getToken()}` });
         return this.http.put<any>(`${this.apiUrl}/${dogId}`, updatedDog, { headers });
     }
-
 
     //  Ta bort en hund
     deleteDog(dogId: string): Observable<void> {
@@ -58,6 +71,6 @@ export class DogProfileService {
     getActiveDogId(): string | null {
         return localStorage.getItem('activeDogId');
     }
-
-
 }
+
+

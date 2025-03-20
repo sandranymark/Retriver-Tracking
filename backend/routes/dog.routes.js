@@ -1,4 +1,7 @@
 import express from "express";
+import multer from "multer";
+import path from "path";
+
 import {
     createDog,
     getDogsByUser,
@@ -9,20 +12,28 @@ import {
 import { authenticateUser } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
+const storage = multer.diskStorage({
+    destination: "./uploads/",
+    filename: (req, file, callback) => {
+        callback(null, Date.now() + path.extname(file.originalname));
+    },
+});
 
-// 🔹 Skapa en hundprofil
-router.post("/", authenticateUser, createDog);
+const upload = multer({ storage });
 
-// 🔹 Hämta alla hundar för inloggad användare
+// Skapar en ny hundprofil
+router.post("/", upload.single("image"), authenticateUser, createDog);
+
+// Hämtar alla hundar för inloggad användare
 router.get("/", authenticateUser, getDogsByUser);
 
-// 🔹 Hämta en specifik hund
+// Hämtar en specifik hund (id)
 router.get("/:id", authenticateUser, getDogById);
 
-// 🔹 Uppdatera en hundprofil
+// Uppdatera en hundprofil
 router.put("/:id", authenticateUser, updateDog);
 
-// 🔹 Ta bort en hund
+// Tar bort en hund
 router.delete("/:id", authenticateUser, deleteDog);
 
 export default router;

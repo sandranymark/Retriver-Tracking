@@ -34,6 +34,7 @@
     width: 250px;
     height: 100vh;
     background-color: white;
+    border-radius: 0 10px 0 0;
     opacity: 1 !important;
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -55,6 +56,7 @@
 
 .side-menu a mat-icon {
     font-size: 24px;
+    /* color: var(--primary-color); */
 }
 
 .side-menu.open {

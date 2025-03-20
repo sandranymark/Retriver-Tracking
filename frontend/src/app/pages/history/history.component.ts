@@ -49,7 +49,7 @@ export class HistoryComponent implements OnInit {
     // Skapa ett Training-objekt för API-anropet
     const trainingData: Training = {
       dogId: this.selectedDogId,
-      type: newSession.title as 'Landapport' | 'Vattenapport' | 'Dirigering' | 'Annat', // Casta till rätt typ
+      type: newSession.title as 'Markering' | 'Sök' | 'Dirigering' | 'Vattenapport' | 'Jaktlydnad' | 'Annat',
       notes: newSession.details,
       rating: 5 // Eventuellt göra detta dynamiskt i framtiden
     };

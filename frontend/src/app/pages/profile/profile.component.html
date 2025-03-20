@@ -1,16 +1,11 @@
 <div class="container">
 
 
-
-    <!-- Modal för att lägga till en ny hund -->
-
-
-
-
-
-
     <div class="header" *ngIf="activeDog">
-        <img [src]="activeDog.image" [alt]="activeDog.name" class="dog-profile-pic">
+        <img [src]="getDogImage(activeDog.imageUrl)" [alt]="activeDog.name" class="dog-profile-pic">
+
+
+
         <!-- <h1>{{ activeDog.nickname }}</h1> -->
         <form class="select__dog-form" [formGroup]="dogForm">
             <mat-form-field appearance="outline" class="no-outline" matTooltip="Välj en hund"
@@ -23,14 +18,6 @@
             </mat-form-field>
         </form>
     </div>
-
-
-    <!-- Knapp för att lägga till en ny hund -->
-    <!-- <div class="select__btns">
-        <button class="btn__add" (click)="openAddDogModal()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div> -->
 
 
     <!-- Profilkort -->
@@ -58,7 +45,7 @@
 
             <!-- Knappgrupp: Spara & Avbryt -->
             <div class="button-group" *ngIf="editMode">
-                <button mat-raised-button color="primary" (click)="saveChanges()">
+                <button class="profile__edit--button" mat-raised-button color="primary" (click)="saveChanges()">
                     <mat-icon>check</mat-icon> Spara
                 </button>
                 <button mat-raised-button color="warn" (click)="cancelEdit()">
@@ -68,10 +55,38 @@
         </ul>
     </div>
 
-    <!-- Add new dog (if you have more then one) -->
-    <button class="add-dog" (click)="openAddDogModal()" matTooltip="Lägg till hund" matTooltipPosition="right">Lägg till
+    <button class="add-dog" (click)="openAddDogModal()" matTooltip="Lägg till hund" matTooltipPosition="below">Lägg till
         hund</button>
 
+
+    <div class="health-tracking">
+        <h2>{{ activeDog?.nickname }}s senaste träningspass</h2>
+        <div class="progress">
+            <p>Taggad</p>
+            <div class="progress-bar">
+                <div class="progress-fill meals"></div>
+            </div>
+        </div>
+        <div class="progress">
+            <p>som fan</p>
+            <div class="progress-bar">
+                <div class="progress-fill walk"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="btn">knapp</button>
+            <button class="btn">knapp</button>
+        </div>
+    </div>
+
+    <div class="profile-card weight-tracking">
+        <h2>Spåra {{ activeDog?.nickname }}s vikt</h2>
+        <h3 class="weight-value">28.09 kg</h3>
+        <button class="btn">+ Lägg till vikt</button>
+    </div>
+
+
+    <!-- Modal för att lägga till en ny hund -->
     <div *ngIf="showAddDogModal" class="modal">
         <div class="modal-content">
             <span class="close" (click)="closeAddDogModal()">&times;</span>
@@ -106,10 +121,21 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Bild-URL</mat-label>
-                    <input matInput [(ngModel)]="newDog.image" name="image">
-                </mat-form-field>
+
+                <!-- <div class="file-upload">
+                    <label for="fileInput">Ladda upp bild</label>
+                    <input class="file-input" id="fileInput" type="file" (change)="onFileSelected($event)"
+                        accept="image/*">
+                </div> -->
+
+                <div class="file-upload">
+                    <label for="fileInput">Välj bild</label>
+                    <input class="file-input" id="fileInput" type="file" (change)="onFileSelected($event)"
+                        accept="image/*">
+                    <span *ngIf="selectedFile" class="file-name">{{ selectedFile.name }}</span>
+                </div>
+
+
 
                 <div class="button-group">
                     <button mat-raised-button color="primary" type="submit">
@@ -125,36 +151,6 @@
 
 
 
-
-
-
-    <!-- Health Tracking -->
-    <div class="health-tracking">
-        <h2>{{ activeDog?.nickname }}s senaste träningspass</h2>
-        <div class="progress">
-            <p>Taggad</p>
-            <div class="progress-bar">
-                <div class="progress-fill meals"></div>
-            </div>
-        </div>
-        <div class="progress">
-            <p>som fan</p>
-            <div class="progress-bar">
-                <div class="progress-fill walk"></div>
-            </div>
-        </div>
-        <div class="buttons">
-            <button class="btn">knapp</button>
-            <button class="btn">knapp</button>
-        </div>
-    </div>
-
-    <!-- Weight Tracking -->
-    <div class="profile-card weight-tracking">
-        <h2>Spåra {{ activeDog?.nickname }}s vikt</h2>
-        <h3 class="weight-value">28.09 kg</h3>
-        <button class="btn">+ Lägg till vikt</button>
-    </div>
 
 
 </div>

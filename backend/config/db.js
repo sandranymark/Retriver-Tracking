@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config(); // Ladda in miljövariabler från .env
+dotenv.config();
 
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URI, {
-            dbName: "retrieverTracker", // 👈 Ange databasen här!
+            dbName: "retrieverTracker",
         });
-        console.log("✅ MongoDB connected to retrieverTracker!");
+        console.log("MongoDB connected to retrieverTracker!");
     } catch (error) {
-        console.error("❌ MongoDB connection error:", error);
+        console.error("MongoDB connection error:", error);
         process.exit(1);
     }
 };

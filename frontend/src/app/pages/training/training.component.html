@@ -1,0 +1,107 @@
+<!-- <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>1</mat-grid-tile>
+    <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>4</mat-grid-tile>
+</mat-grid-list> -->
+<section class="training-modal">
+    <h2 class="training__heading">Lägg till träningspass</h2>
+    <form class="training__form" [formGroup]="trainingForm" (ngSubmit)="submitTraining()">
+
+        <div class="training__form-group">
+            <mat-form-field appearance="outline" class="training__field">
+                <mat-label>Välj hund</mat-label>
+                <mat-select formControlName="dogId" (selectionChange)="loadTrainings($event.value)">
+                    <mat-option *ngFor="let dog of dogs" [value]="dog._id">
+                        {{ dog.nickname }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="training__form-group">
+            <mat-form-field appearance="outline" class="training__field">
+                <mat-label>Typ av träning</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let type of trainingTypes" [value]="type">
+                        {{ type }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="training__form-group">
+            <mat-form-field appearance="outline" class="training__field training__field--textarea">
+                <mat-label>Beskrivning</mat-label>
+                <textarea matInput formControlName="notes" rows="3"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="training__form-group">
+            <mat-form-field appearance="outline" class="training__field">
+                <mat-label>Datum</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="training__form-group">
+            <mat-form-field appearance="outline" class="training__field training__field--rating">
+                <mat-label>Betyg (1-5)</mat-label>
+                <input matInput type="number" formControlName="rating" min="1" max="5">
+            </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" class="training__submit"
+            [disabled]="trainingForm.invalid">
+            Lägg till pass
+        </button>
+    </form>
+
+    <hr class="training__divider">
+
+</section>
+
+
+
+
+<h2>Träningspass för {{ activeDogName || 'vald hund' }}</h2>
+
+<table *ngIf="trainings.length > 0; else noTrainings" mat-table [dataSource]="trainings" class="mat-elevation-z8">
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Datum </th>
+        <td mat-cell *matCellDef="let training"> {{ training.date | date:'yyyy-MM-dd HH:mm' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> Typ </th>
+        <td mat-cell *matCellDef="let training"> {{ training.type }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef> Anteckningar </th>
+        <td mat-cell *matCellDef="let training"> {{ training.notes }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rating">
+        <th mat-header-cell *matHeaderCellDef> Betyg </th>
+        <td mat-cell *matCellDef="let training"> {{ training.rating }} / 5 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Åtgärder </th>
+        <td mat-cell *matCellDef="let training">
+            <button mat-icon-button color="warn" (click)="deleteTraining(training._id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['date', 'type', 'notes', 'rating', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['date', 'type', 'notes', 'rating', 'actions'];"></tr>
+</table>
+
+<ng-template #noTrainings>
+    <p>Inga träningspass registrerade för denna hund.</p>
+</ng-template>

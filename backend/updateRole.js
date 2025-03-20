@@ -14,16 +14,18 @@ const updateRole = async () => {
         );
 
         if (!user) {
-            console.log("❌ Användaren finns inte!");
+            console.log("Användaren finns inte!");
             process.exit();
         }
 
-        console.log("✅ Användarens roll uppdaterad:", user);
+        console.log("Användarens roll uppdaterad:", user);
         process.exit();
     } catch (err) {
-        console.error("❌ Fel vid uppdatering:", err);
+        console.error("Fel vid uppdatering:", err);
         process.exit(1);
     }
 };
 
 updateRole();
+
+// Denna har jag skapat för att kunna byta roll från user till admin.

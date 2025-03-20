@@ -1,4 +1,8 @@
 <router-outlet>
     <app-header *ngIf="authService.isLoggedIn()"></app-header>
 
+    <button mat-fab color="primary" class="global-fab" (click)="openTrainingModal()">
+        <mat-icon>add</mat-icon>
+    </button>
+
 </router-outlet>

@@ -19,18 +19,18 @@ export const register = async (req, res, next) => {
             return next(new Error("Email is already in use."));
         }
 
-        // Kollar om användarnamnet redan existerar
+        // Kollar om användarnamnet redan används av någon annan.
         const existingUsername = await User.findOne({ username });
         if (existingUsername) {
             res.status(400);
             return next(new Error("Username is already taken."));
         }
 
-        // Hashar lösenordet innan det sparas
+        // Hashar lösenordet innan det sparas ner i databasen.
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Skapar användaren med HASHAT lösenord
+        // Skapar en NY användaren med HASHAT lösenord.
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
 
@@ -62,14 +62,12 @@ export const login = async (req, res, next) => {
             return next(new Error(ERROR_MESSAGES.INVALID_CREDENTIALS));
         }
 
-        // Skapar upp JWT-token
+        // Skapar upp JWT-token när användaren loggar in.
         const token = jwt.sign(
             { userId: user._id, role: user.role },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
-
-
         res.json({ message: "Login successful!", token });
     } catch (error) {
         next(err);
