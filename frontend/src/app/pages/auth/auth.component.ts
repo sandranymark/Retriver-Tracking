@@ -29,7 +29,7 @@ export class AuthComponent {
   login() {
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: (res) => {
-        console.log('✅ Login successful!', res);
+        console.log('Login successful!', res);
         this.router.navigate(['/home']);
       },
       error: (err) => {
@@ -41,7 +41,7 @@ export class AuthComponent {
   register() {
     this.authService.register({ username: this.username, email: this.email, password: this.password }).subscribe({
       next: (res) => {
-        console.log('✅ Registration successful!', res);
+        console.log('Registration successful!', res);
         this.successMessage = 'Lyckad registrering!';
         setTimeout(() => {
           this.toggleForm();

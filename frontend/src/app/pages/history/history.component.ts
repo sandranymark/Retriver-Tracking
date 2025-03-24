@@ -1,81 +1,129 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Training, TrainingSession } from '../../models/training.model';
-import { CalendarComponent } from "../../components/calendar/calendar.component";
+import { Dog } from '../../models/dog.model';
+import { FormsModule } from '@angular/forms';
+import { DogProfileService } from '../../core/dog-profile.service';
+import { CalendarComponent } from '../../components/calendar/calendar.component';
+import { TrainingSession, Training } from '../../models/training.model';
 import { TrainingService } from '../../core/training.service';
+import { MatSelect } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOption } from '@angular/material/select';
+import { forkJoin } from 'rxjs'; // Är den mest idiotisk,enkla, pålitliga sättet Angular har att hantera flera parallella HTTP-anrop på.
+
 
 @Component({
   standalone: true,
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css'],
-  imports: [CalendarComponent, CommonModule]
+  imports: [CalendarComponent, CommonModule, FormsModule, MatFormFieldModule, MatSelect, MatOption]
 })
+
 export class HistoryComponent implements OnInit {
+
+  dogs: Dog[] = [];
   recentSessions: TrainingSession[] = [];
   selectedDogId: string = "";
+  showAllDogs: boolean = false;
 
-  constructor(private trainingService: TrainingService) { }
+  constructor(
+    private trainingService: TrainingService,
+    private dogProfileService: DogProfileService
+  ) { }
 
   ngOnInit() {
-    const dogId = "67d19bc181a434ac05b67d60";
-    this.loadTrainings(dogId);
-  }
-
-  loadTrainings(dogId: string) {
-    this.trainingService.getTrainingsForDog(dogId).subscribe({
-      next: (trainings: Training[]) => {
-        this.recentSessions = trainings.map(training => ({
-          title: training.type,
-          date: training.date ? new Date(training.date).toISOString().split('T')[0] : '',
-          details: training.notes || 'Inga anteckningar'
-        }));
+    this.dogProfileService.getAllDogs().subscribe({
+      next: (dogs) => {
+        this.dogs = dogs;
+        if (dogs.length > 0) {
+          this.selectedDogId = dogs[0]._id;
+          this.loadTrainingsForDog(dogs[0]._id);
+        }
       },
-      error: (err) => console.error('❌ Error fetching trainings:', err)
+      error: (err) => console.error("Kunde inte hämta hundar:", err)
     });
   }
+
+  onToggleShowAll() {
+    if (this.showAllDogs) {
+      this.loadTrainingsForAllDogs();
+    } else {
+      this.loadTrainingsForDog(this.selectedDogId);
+    }
+  }
+
+
+  loadTrainingsForDog(dogId: string) {
+
+    this.showAllDogs = false;
+
+    const dogMap = new Map(this.dogs.map(dog => [dog._id.toString(), dog]));
+
+    this.trainingService.getTrainingsForDog(dogId).subscribe({
+      next: (trainings: Training[]) => {
+        this.recentSessions = this.convertTrainingsToSessions(trainings, dogMap);
+      },
+      error: (err) => console.error(" Kunde inte hitta träningspassen:", err)
+    });
+  }
+
+
+  loadTrainingsForAllDogs() {
+
+    const dogMap = new Map(this.dogs.map(dog => [dog._id.toString(), dog]));
+    const allRequests$ = this.dogs.map(dog =>
+      this.trainingService.getTrainingsForDog(dog._id)
+
+    );
+
+    forkJoin(allRequests$).subscribe({
+      next: (results: Training[][]) => {
+        const allTrainings = results.flat();
+        this.recentSessions = this.convertTrainingsToSessions(
+          allTrainings,
+          dogMap
+        );
+      },
+      error: (err) => console.error("Fel vid hämtning av alla träningar:", err)
+    });
+  }
+
+
+  convertTrainingsToSessions(trainings: Training[], dogMap: Map<string, Dog>): TrainingSession[] {
+    return trainings.map(training => {
+      const dogId = typeof training.dog === 'string'
+        ? training.dog
+        : training.dog._id.toString();
+
+      const dog = dogMap.get(dogId);
+
+      return {
+        title: training.type,
+        date: training.date ? new Date(training.date).toISOString().split("T")[0] : '',
+        details: training.notes || 'Inga anteckningar',
+        dogImageUrl: dog?.imageUrl,
+      };
+    });
+  }
+
+
+
 
 
   trackByDate(index: number, session: TrainingSession): string {
     return session.date + session.title;
   }
 
-  addTraining(newSession: TrainingSession) {
-    if (!this.selectedDogId) {
-      console.error("❌ Ingen hund vald!");
-      return;
+
+
+  getDogImage(imagePath: string | undefined): string {
+    if (!imagePath) {
+      return 'assets/img/flatcoatedRetriever3.jpg'; // Dummybild om ingen finns
     }
-
-    // Skapa ett Training-objekt för API-anropet
-    const trainingData: Training = {
-      dogId: this.selectedDogId,
-      type: newSession.title as 'Markering' | 'Sök' | 'Dirigering' | 'Vattenapport' | 'Jaktlydnad' | 'Annat',
-      notes: newSession.details,
-      rating: 5 // Eventuellt göra detta dynamiskt i framtiden
-    };
-
-    this.trainingService.addTraining(trainingData).subscribe({
-      next: (savedTraining) => {
-        console.log("✅ Träning sparad!", savedTraining);
-
-        // Konvertera tillbaka till TrainingSession för UI
-        const session: TrainingSession = {
-          title: savedTraining.type,
-          date: new Date(savedTraining.date ?? new Date()).toISOString().split("T")[0], // Datum från API eller "nu"
-          details: savedTraining.notes || "Inga anteckningar"
-        };
-
-        this.recentSessions = [session, ...this.recentSessions];
-      },
-      error: (err) => console.error("❌ Fel vid sparande av träning:", err)
-    });
+    return `http://localhost:8181/${imagePath}`;
   }
 
 
+
 }
-
-
-// TrackedbyDate är en metod som används för att identifiera varje träningspass i listan.
-// Om du lägger till ett nytt träningspass,
-// behåller Angular de gamla istället för att skapa om alla.
-// Detta gör att sidan inte behöver laddas om varje gång du lägger till ett nytt träningspass.

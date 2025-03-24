@@ -11,7 +11,7 @@
         <div class="training__form-group">
             <mat-form-field appearance="outline" class="training__field">
                 <mat-label>Välj hund</mat-label>
-                <mat-select formControlName="dogId">
+                <mat-select formControlName="dog">
                     <mat-option *ngFor="let dog of dogs" [value]="dog._id">
                         {{ dog.nickname }}
                     </mat-option>

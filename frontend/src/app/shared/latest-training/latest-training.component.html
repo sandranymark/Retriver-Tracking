@@ -1,0 +1,16 @@
+<div class="training-card" *ngIf="training">
+    <h2 class="training-card__name">{{ dogName }}s senaste träningspass</h2>
+
+    <p><strong>Typ:</strong> {{ training.type }}</p>
+    <p><strong>Anteckningar:</strong><br> {{ training.notes }}</p>
+
+    <div class="training-detail rating-stars">
+        <app-rating [rating]="training.rating" [max]="5" [showValue]="true"></app-rating>
+    </div>
+
+    <p><strong>Datum:</strong> {{ training.createdAt | date: 'yyyy-MM-dd HH:mm' }}</p>
+</div>
+
+<div class="training-card" *ngIf="!training">
+    <p>Inget träningspass registrerat för {{ dogName }} ännu.</p>
+</div>

@@ -11,7 +11,7 @@ export const routes: Routes = [
     { path: 'auth', component: AuthComponent },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'training', component: TrainingComponent, canActivate: [AuthGuard] },
-    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'my-dogs', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];

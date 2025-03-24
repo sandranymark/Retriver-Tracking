@@ -1,1 +1,7 @@
-<p>rating works!</p>
+<div class="rating-stars">
+    <mat-icon *ngFor="let star of getStars()">
+        {{ star === 'full-star' ? 'star' : 'star_border' }}
+    </mat-icon>
+
+    <span class="rating-text" *ngIf="showValue">({{ rating }} / {{ max }})</span>
+</div>

@@ -7,7 +7,7 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Rubrik */
+
 .training__heading {
     font-size: 24px;
     text-align: center;
@@ -15,7 +15,6 @@
     color: #333;
 }
 
-/* Formulär */
 .training__form {
     display: flex;
     flex-direction: column;

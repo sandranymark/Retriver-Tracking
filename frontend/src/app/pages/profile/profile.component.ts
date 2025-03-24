@@ -11,6 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Dog } from '../../models/dog.model';
 import { DogProfileService } from '../../core/dog-profile.service';
+import { Training } from '../../models/training.model';
+import { TrainingService } from '../../core/training.service';
+
+import { LatestTrainingComponent } from '../../shared/latest-training/latest-training.component';
 
 @Component({
   standalone: true,
@@ -26,6 +30,7 @@ import { DogProfileService } from '../../core/dog-profile.service';
     MatButtonModule,
     MatSelectModule,
     MatOptionModule,
+    LatestTrainingComponent,
 
   ],
   templateUrl: './profile.component.html',
@@ -38,6 +43,8 @@ export class ProfileComponent implements OnInit {
   dogForm!: FormGroup;
   selectedFile: File | null = null;
   selectedFileName: string | null = null;
+  latestTraining: Training | null = null;
+
 
   dogs: Dog[] = [];
   activeDog: Dog | null = null;
@@ -47,7 +54,7 @@ export class ProfileComponent implements OnInit {
     { key: 'name', label: 'Namn' },
     { key: 'breed', label: 'Ras' },
     { key: 'sex', label: 'Kön' },
-    { key: 'age', label: 'Född' }
+    { key: 'age', label: 'Ålder' }
   ];
 
   newDog: Partial<Dog> = {
@@ -61,7 +68,10 @@ export class ProfileComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private dogProfileService: DogProfileService) { }
+  constructor(
+    private fb: FormBuilder,
+    private dogProfileService: DogProfileService,
+    private trainingService: TrainingService) { }
 
   ngOnInit() {
     this.dogForm = this.fb.group({
@@ -82,7 +92,9 @@ export class ProfileComponent implements OnInit {
           this.dogForm.patchValue({ selectedDog: dogs[0]._id }); // Sätt första hunden som default
           this.selectDog(dogs[0]._id);
         }
+
       },
+
       error: (err) => console.error(' Error fetching dogs:', err)
     });
   }
@@ -94,11 +106,13 @@ export class ProfileComponent implements OnInit {
     this.dogProfileService.getActiveDog().subscribe({
       next: (dog) => {
         if (!dog) {
-          console.error(" Ingen hund hittades i API-svaret!");
+          console.error(" Ingen hund hittades!");
           return;
         }
         this.activeDog = { ...dog };
         this.originalProfile = { ...dog };
+        this.getLatestTraining(dog._id);
+
       },
       error: (err) => console.error('Error fetching active dog:', err)
     });
@@ -195,7 +209,7 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  // Metod för att hantera filval
+  // För att visa valt filnamn i inputfältet
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -209,8 +223,31 @@ export class ProfileComponent implements OnInit {
     if (!imagePath) {
       return 'assets/img/flatcoatedRetriever3.jpg'; // Dummybild om ingen finns
     }
-    return `http://localhost:8181/${imagePath}`; // Se till att backend exponerar /uploads/
+    return `http://localhost:8181/${imagePath}`;
   }
+
+
+  getLatestTraining(dogId: string) {
+    this.trainingService.getTrainingsForDog(dogId).subscribe({
+      next: (trainings) => {
+        if (trainings.length === 0) {
+          this.latestTraining = null;
+          return;
+        }
+
+        const sorted = trainings.sort((a, b) =>
+          new Date(b.createdAt || '').getTime() - new Date(a.createdAt || '').getTime()
+        );
+
+        this.latestTraining = sorted[0];
+      },
+      error: (err) => {
+        console.error('Kunde inte hämta träningsdata:', err);
+        this.latestTraining = null;
+      }
+    });
+  }
+
 
 
 

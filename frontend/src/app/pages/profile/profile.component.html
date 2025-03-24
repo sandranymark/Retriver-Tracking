@@ -1,12 +1,13 @@
 <div class="container">
-
+    <div ngClass="profile-card no-dog" *ngIf="dogs.length === 0" class="no-dogs-message">
+        <p>Ingen hund registrerad ännu.</p>
+    </div>
 
     <div class="header" *ngIf="activeDog">
+
+
         <img [src]="getDogImage(activeDog.imageUrl)" [alt]="activeDog.name" class="dog-profile-pic">
 
-
-
-        <!-- <h1>{{ activeDog.nickname }}</h1> -->
         <form class="select__dog-form" [formGroup]="dogForm">
             <mat-form-field appearance="outline" class="no-outline" matTooltip="Välj en hund"
                 matTooltipPosition="right">
@@ -43,7 +44,6 @@
                 </div>
             </li>
 
-            <!-- Knappgrupp: Spara & Avbryt -->
             <div class="button-group" *ngIf="editMode">
                 <button class="profile__edit--button" mat-raised-button color="primary" (click)="saveChanges()">
                     <mat-icon>check</mat-icon> Spara
@@ -59,25 +59,25 @@
         hund</button>
 
 
-    <div class="health-tracking">
-        <h2>{{ activeDog?.nickname }}s senaste träningspass</h2>
-        <div class="progress">
-            <p>Taggad</p>
-            <div class="progress-bar">
-                <div class="progress-fill meals"></div>
-            </div>
+    <!-- <div class="training-card" *ngIf="latestTraining">
+        <h2 class="training-card__name">{{ activeDog?.nickname }}s senaste träningspass</h2>
+        <p><strong>Typ:</strong> {{ latestTraining.type }}</p>
+        <p><strong>Anteckningar:</strong><br> {{ latestTraining.notes }}</p>
+        <div class="training-detail rating-stars">
+            <app-rating [rating]="latestTraining.rating" [max]="5" [showValue]="true"></app-rating>
         </div>
-        <div class="progress">
-            <p>som fan</p>
-            <div class="progress-bar">
-                <div class="progress-fill walk"></div>
-            </div>
-        </div>
-        <div class="buttons">
-            <button class="btn">knapp</button>
-            <button class="btn">knapp</button>
-        </div>
+        <p><strong>Datum:</strong> {{ latestTraining.createdAt | date: 'yyyy-MM-dd HH:mm' }}</p>
     </div>
+    <div class="training-card" *ngIf="!latestTraining">
+        <p>Inget träningspass registrerat för {{ activeDog?.nickname }} ännu.</p>
+    </div>
+ -->
+
+    <app-latest-training [training]="latestTraining" [dogName]="activeDog?.nickname">
+    </app-latest-training>
+
+
+
 
     <div class="profile-card weight-tracking">
         <h2>Spåra {{ activeDog?.nickname }}s vikt</h2>
@@ -121,12 +121,6 @@
                     </mat-select>
                 </mat-form-field>
 
-
-                <!-- <div class="file-upload">
-                    <label for="fileInput">Ladda upp bild</label>
-                    <input class="file-input" id="fileInput" type="file" (change)="onFileSelected($event)"
-                        accept="image/*">
-                </div> -->
 
                 <div class="file-upload">
                     <label for="fileInput">Välj bild</label>

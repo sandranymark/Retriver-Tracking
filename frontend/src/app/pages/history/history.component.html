@@ -1,19 +1,43 @@
+<div class="jakt-header">Retrieverträning</div>
 <section class="history-wrapper">
 
-    <h2>Träningshistorik</h2>
+
+    <div class="history-controls">
+        <label class="toggle">
+            <input type="checkbox" [(ngModel)]="showAllDogs" (change)="onToggleShowAll()">
+            <span class="slider"></span> Visa alla hundars träningar
+        </label>
+
+        <mat-form-field appearance="outline" class="dog-select-field">
+            <mat-label>Välj hund</mat-label>
+            <mat-select [(value)]="selectedDogId" (selectionChange)="loadTrainingsForDog(selectedDogId)">
+                <mat-option *ngFor="let dog of dogs" [value]="dog._id">
+                    {{ dog.nickname || dog.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 
 
-    <ul *ngIf="recentSessions.length > 0; else noTrainings">
-        <li *ngFor="let session of recentSessions; trackBy: trackByDate">
-            <strong>{{ session.date }}:</strong> {{ session.title }} - {{ session.details }}
-        </li>
-    </ul>
+    <div *ngFor="let session of recentSessions; trackBy: trackByDate" class="jakt-card with-dog">
+        <div class="card-header">
+            <div class="card-meta">
+                <p>
+                    <span class="tag">{{ session.title }}</span>
+                    <strong>{{ session.date }}</strong>
+                </p>
+            </div>
+            <img [src]="getDogImage(session.dogImageUrl)" alt="Hund" class="dog-thumb" />
+        </div>
+        <p>{{ session.details }}</p>
+    </div>
 
-    <ng-template #noTrainings>
+
+    <div *ngIf="recentSessions.length === 0" class="jakt-card">
         <p>Inga träningspass registrerade ännu!</p>
-    </ng-template>
+    </div>
+
 
 
     <app-calendar [recentSessions]="recentSessions"></app-calendar>
-
 </section>

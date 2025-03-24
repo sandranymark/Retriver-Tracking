@@ -21,11 +21,21 @@ export class TrainingService {
         return this.http.get<Training[]>(`${this.apiUrl}/${dogId}`, { headers: this.getAuthHeaders() });
     }
 
+    getLatestTrainingForDog(dogId: string): Observable<Training> {
+        return this.http.get<Training>(`${this.apiUrl}/${dogId}/latest`, {
+            headers: this.getAuthHeaders()
+        });
+    }
 
 
 
-    addTraining(trainingData: Training): Observable<Training> {
-        return this.http.post<Training>(`${this.apiUrl}`, trainingData, { headers: this.getAuthHeaders() });
+    // addTraining(trainingData: Training): Observable<Training> {
+    //     return this.http.post<Training>(`${this.apiUrl}`, trainingData, { headers: this.getAuthHeaders() });
+    // }
+    addTraining(trainingData: any): Observable<Training> {
+        return this.http.post<Training>(`${this.apiUrl}`, trainingData, {
+            headers: this.getAuthHeaders()
+        });
     }
 
 

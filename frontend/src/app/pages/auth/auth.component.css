@@ -31,9 +31,16 @@ button:hover {
     background-color: #4d9bd2;
 }
 
+.toggle-text--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
 .toggle-text {
     display: flex;
-    flex-direction: column;
+    width: 150px;
     color: black;
     font-size: 14px;
     margin-top: 15px;

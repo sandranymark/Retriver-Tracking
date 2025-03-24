@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 :root {
+    --bg-dark: #2F4858;
     --bg-peach: #fde6d2;
-    --bg-light-blue: #d6f0f5;
     --primary-color: #ff8c42;
     --text-dark: #333;
     --text-light: #777;
@@ -17,6 +17,7 @@ body {
     font-family: Poppins, sans-serif !important;
     display: flex;
     flex-direction: column;
+    background: white;
 }
 
 html,
@@ -35,9 +36,9 @@ body {
     background-color: transparent !important;
 }
 
-.mat-mdc-select-arrow svg {
+/* .mat-mdc-select-arrow svg {
     fill: white !important;
-}
+} */
 
 .mat-mdc-raised-button:not(:disabled) {
     background-color: #2F4858 !important;

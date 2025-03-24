@@ -8,6 +8,10 @@
     <button class="close-menu" (click)="toggleMenu()">
         <mat-icon>close</mat-icon>
     </button>
+    <a routerLink="/my-dogs" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>pets</mat-icon>
+        <span>Mina hundar</span>
+    </a>
 
     <a routerLink="/training" routerLinkActive="active" (click)="closeMenu()">
         <mat-icon>sports_baseball</mat-icon>
@@ -18,10 +22,7 @@
         <mat-icon>history</mat-icon>
         <span>Historik</span>
     </a>
-    <a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">
-        <mat-icon>account_circle</mat-icon>
-        <span>Profil</span>
-    </a>
+
     <a (click)="logout()" class="logout">
         <span>Logga ut</span>
     </a>

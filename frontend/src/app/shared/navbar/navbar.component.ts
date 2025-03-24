@@ -29,7 +29,7 @@ export class NavbarComponent {
     this.router.navigate(['/auth']);
   }
 
-  // Lyssnar på klick vart som helst på dokumentet för att stänga navbar-menyn
+  // Lyssnar på klick vart som helst på sidan för att stänga navbar-menyn
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
     const menu = document.querySelector('.side-menu');

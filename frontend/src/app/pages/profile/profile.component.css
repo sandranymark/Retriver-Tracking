@@ -17,6 +17,10 @@
     flex-direction: column;
 }
 
+.no-dog {
+    margin-top: 2rem;
+}
+
 .dog-profile-pic {
     width: 150px;
     height: 150px;
@@ -117,7 +121,7 @@
 .weight-value {
     font-size: 20px;
     font-weight: bold;
-    color: white;
+    color: black;
 }
 
 .small-line {
@@ -386,4 +390,39 @@ mat-option {
     color: black;
     text-align: center;
     font-weight: 500;
+}
+
+
+
+.training-card {
+    filter: drop-shadow(3px 3px 4px #050505);
+    background: #f5f5f5;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+
+
+.training-card p {
+    margin: 0.4rem 0;
+    font-size: 1rem;
+    padding: 5px;
+}
+
+.training-card strong {
+    color: black;
+}
+
+.training-card__name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    background-color: #2F4858;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    border-radius: 8px;
+    /* filter: drop-shadow(3px 3px 4px #050505); */
 }

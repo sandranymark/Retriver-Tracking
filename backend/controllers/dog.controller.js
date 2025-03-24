@@ -2,7 +2,6 @@ import Dog from "../models/Dog.model.js";
 import { dogValidation } from "../validation/dog.validation.js";
 
 // Multer storage setup
-
 // Skapar en ny hundprofil på den inloggade användaren
 export const createDog = async (req, res) => {
     const { error } = dogValidation.validate(req.body);
@@ -11,7 +10,9 @@ export const createDog = async (req, res) => {
     const newDog = new Dog({
         ...req.body,
         owner: req.user.userId,
-        imageUrl: `uploads/${req.file.filename}`
+        // imageUrl: `uploads/${req.file.filename}`
+        imageUrl: req.file ? `uploads/${req.file.filename}` : undefined
+
     });
 
     await newDog.save();
