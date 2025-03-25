@@ -13,13 +13,32 @@
             <button type="submit">Logga in</button>
         </form>
 
-        <!--  Registreringsform -->
-        <form class="login__form" *ngIf="isRegistering" (ngSubmit)="register()">
-            <input type="text" [(ngModel)]="username" name="username" placeholder="Användarnamn" required>
-            <input type="email" [(ngModel)]="email" name="email" placeholder="E-post" required>
-            <input type="password" [(ngModel)]="password" name="password" placeholder="Lösenord" required>
-            <button type="submit">Registrera</button>
+        <form class="login__form" *ngIf="isRegistering" (ngSubmit)="register()" #registerForm="ngForm">
+            <input type="text" [(ngModel)]="username" name="username" #usernameInput="ngModel"
+                placeholder="Användarnamn" required minlength="3" />
+            <div class="error-message" *ngIf="usernameInput.invalid && usernameInput.touched">
+                Minst 3 tecken krävs
+            </div>
+
+            <input type="email" [(ngModel)]="email" name="email" #emailRegInput="ngModel" placeholder="E-post" required
+                email />
+            <div class="error-message" *ngIf="emailRegInput.invalid && emailRegInput.touched">
+                Ange en giltig e-postadress
+            </div>
+
+            <input type="password" [(ngModel)]="password" name="password" #passwordRegInput="ngModel"
+                placeholder="Lösenord" required minlength="6" />
+            <div class="error-message" *ngIf="passwordRegInput.invalid && passwordRegInput.touched">
+                Minst 6 tecken krävs
+            </div>
+
+            <button type="submit" [disabled]="registerForm.invalid">Registrera</button>
         </form>
+
+
+
+
+
 
         <article class="toggle-text--container">
             <p class="toggle-text" (click)="toggleForm()">

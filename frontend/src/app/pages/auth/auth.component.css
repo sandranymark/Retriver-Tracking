@@ -84,3 +84,11 @@ button:hover {
     margin-bottom: 15px;
     font-weight: bold;
 }
+
+
+.error-message {
+    color: #f44336;
+    font-size: 0.85rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
