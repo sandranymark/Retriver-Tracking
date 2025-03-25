@@ -25,6 +25,7 @@ body {
     height: 100%;
 }
 
+
 .mat-mdc-form-field-subscript-wrapper {
     display: none !important;
     height: 0px !important;
@@ -36,9 +37,7 @@ body {
     background-color: transparent !important;
 }
 
-/* .mat-mdc-select-arrow svg {
-    fill: white !important;
-} */
+
 
 .mat-mdc-raised-button:not(:disabled) {
     background-color: #2F4858 !important;

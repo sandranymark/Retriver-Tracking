@@ -7,11 +7,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import { TrainingSession } from '../../models/training.model';
 import svLocale from '@fullcalendar/core/locales/sv';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { TrainingModalComponent } from '../training-modal/training-modal.component';
+import { Dog } from '../../models/dog.model';
+
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule, FullCalendarModule, FormsModule],
+  imports: [CommonModule, FullCalendarModule, FormsModule, MatDialogModule],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
@@ -19,6 +23,8 @@ import svLocale from '@fullcalendar/core/locales/sv';
 export class CalendarComponent {
 
   @Input() recentSessions: TrainingSession[] = [];
+  @Input() dogs: Dog[] = [];
+  @Input() selectedDogId: string = '';
 
   selectedSession: TrainingSession | null = null;
   showAddTrainingModal = false;
@@ -42,6 +48,8 @@ export class CalendarComponent {
     dateClick: this.handleDateClick.bind(this)
   };
 
+  constructor(private dialog: MatDialog) { }
+
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['recentSessions']) {
@@ -57,9 +65,6 @@ export class CalendarComponent {
   }
 
 
-
-
-
   handleEventClick(eventInfo: any) {
     this.selectedSession = {
       title: eventInfo.event.title,
@@ -73,12 +78,33 @@ export class CalendarComponent {
     this.selectedSession = null;
   }
 
+  // handleDateClick(dateClickInfo: DateClickArg) {
+  //   this.selectedDate = dateClickInfo.dateStr;
+  //   this.showAddTrainingModal = true;
+  //   this.newTrainingTitle = "";
+  //   this.newTrainingDetails = "";
+  // }
   handleDateClick(dateClickInfo: DateClickArg) {
-    this.selectedDate = dateClickInfo.dateStr;
-    this.showAddTrainingModal = true;
-    this.newTrainingTitle = "";
-    this.newTrainingDetails = "";
+    const selectedDate = dateClickInfo.date;
+
+    const dialogRef = this.dialog.open(TrainingModalComponent, {
+      width: '600px',
+      data: {
+        date: selectedDate,
+        dogs: this.dogs,
+        dogId: this.selectedDogId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Träningspass sparat via kalender:', result);
+      }
+    });
   }
+
+
+
 
   closeAddTrainingModal() {
     this.showAddTrainingModal = false;

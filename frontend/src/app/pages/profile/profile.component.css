@@ -274,24 +274,30 @@ ul {
     align-items: center;
 }
 
-::ng-deep .no-outline .mdc-notched-outline {
+/* ::ng-deep .no-outline .mdc-notched-outline {
     display: none;
-}
+} */
+
 
 .no-outline {
-    width: 100px;
+    width: 90vw;
+    /* background-color: #6a8b796b; */
+
 }
 
+
 .select__dog-form {
+    margin-top: 1rem;
     display: flex;
-    justify-content: right;
-    align-items: right;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1rem;
 }
 
 .mat-mdc-form-field-infix {
     width: 100%;
 }
+
 
 mat-select {
     text-align: center;

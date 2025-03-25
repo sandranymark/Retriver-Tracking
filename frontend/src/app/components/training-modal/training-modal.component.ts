@@ -1,4 +1,3 @@
-
 import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { Training } from '../../models/training.model';
 import { TrainingService } from '../../core/training.service';
 import { Dog } from '../../models/dog.model';
+import { TrainingEventService } from '../../core/training-event.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   standalone: true,
@@ -33,7 +35,8 @@ import { Dog } from '../../models/dog.model';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule
+    MatIconModule,
+
   ],
   templateUrl: './training-modal.component.html',
   styleUrls: ['./training-modal.component.css']
@@ -47,20 +50,40 @@ export class TrainingModalComponent implements OnInit {
     private fb: FormBuilder,
     private trainingService: TrainingService,
     public dialogRef: MatDialogRef<TrainingModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private trainingEventService: TrainingEventService,
+    private snackBar: MatSnackBar,
   ) { }
 
-  ngOnInit() {
-    this.dogs = this.data.dogs;
+  // ngOnInit() {
+  //   this.dogs = this.data.dogs;
 
+  //   this.trainingForm = this.fb.group({
+  //     dog: [this.dogs.length > 0 ? this.dogs[0]._id : '', Validators.required],
+  //     date: ['', Validators.required],
+  //     type: ['', Validators.required],
+  //     notes: ['', Validators.maxLength(500)],
+  //     rating: [3, [Validators.required, Validators.min(1), Validators.max(5)]]
+  //   });
+  // }
+  ngOnInit() {
     this.trainingForm = this.fb.group({
-      dog: [this.dogs.length > 0 ? this.dogs[0]._id : '', Validators.required],
-      date: ['', Validators.required],
+      dog: ['', Validators.required],
+      date: [this.data.date ? new Date(this.data.date) : null, Validators.required],
       type: ['', Validators.required],
       notes: ['', Validators.maxLength(500)],
       rating: [3, [Validators.required, Validators.min(1), Validators.max(5)]]
     });
+
+    this.dogs = this.data.dogs || [];
+
+    if (this.data.dogId && this.dogs.some(d => d._id === this.data.dogId)) {
+      this.trainingForm.patchValue({ dog: this.data.dogId });
+    } else if (this.dogs.length > 0) {
+      this.trainingForm.patchValue({ dog: this.dogs[0]._id });
+    }
   }
+
 
   submitTraining() {
     if (this.trainingForm.invalid) return;
@@ -82,7 +105,17 @@ export class TrainingModalComponent implements OnInit {
 
     this.trainingService.addTraining(trainingData).subscribe({
       next: (savedTraining) => {
-        alert('Träningspass sparat!');
+        this.snackBar.open(
+          'Träningspass sparat!',
+          'Stäng',
+          {
+            duration: 3000,
+            verticalPosition: 'top',
+            panelClass: ['snackbar-success']
+          }
+        );
+
+        this.trainingEventService.announceTrainingAdded(trainingData.dogId);
         this.dialogRef.close(savedTraining);
       },
       error: (err) => console.error('Kunde inte spara träningspass:', err)

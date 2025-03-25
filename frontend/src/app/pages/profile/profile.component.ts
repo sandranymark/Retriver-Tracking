@@ -13,8 +13,11 @@ import { Dog } from '../../models/dog.model';
 import { DogProfileService } from '../../core/dog-profile.service';
 import { Training } from '../../models/training.model';
 import { TrainingService } from '../../core/training.service';
-
 import { LatestTrainingComponent } from '../../shared/latest-training/latest-training.component';
+import { TrainingEventService } from '../../core/training-event.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DogEventService } from '../../core/dog-event.service';
+
 
 @Component({
   standalone: true,
@@ -67,11 +70,14 @@ export class ProfileComponent implements OnInit {
   };
 
 
-
   constructor(
     private fb: FormBuilder,
     private dogProfileService: DogProfileService,
-    private trainingService: TrainingService) { }
+    private trainingService: TrainingService,
+    private trainingEventService: TrainingEventService,
+    private dogEventService: DogEventService,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.dogForm = this.fb.group({
@@ -79,8 +85,18 @@ export class ProfileComponent implements OnInit {
     });
 
     this.loadDogs();
+    this.trainingEventService.trainingAdded$.subscribe((dogId) => {
+      if (this.activeDog && this.activeDog._id === dogId) {
+        this.getLatestTraining(dogId);
+      }
+    });
 
   }
+
+
+
+
+
 
   loadDogs() {
     this.dogProfileService.getAllDogs().subscribe({
@@ -179,6 +195,35 @@ export class ProfileComponent implements OnInit {
 
 
 
+  // addDog() {
+  //   if (!this.newDog.name || !this.newDog.breed || this.newDog.age === undefined) {
+  //     alert('Fyll i alla fält!');
+  //     return;
+  //   }
+
+  //   const formData = new FormData();
+  //   formData.append("name", this.newDog.name!);
+  //   formData.append("nickname", this.newDog.nickname || '');
+  //   formData.append("breed", this.newDog.breed!);
+  //   formData.append("age", this.newDog.age.toString());
+  //   formData.append("sex", this.newDog.sex!);
+
+  //   if (this.selectedFile) {
+  //     formData.append("image", this.selectedFile);
+  //   }
+  //   this.closeAddDogModal();
+
+  //   this.dogProfileService.addDog(formData).subscribe({
+  //     next: (response) => {
+  //       console.log("Ny hundJÄVEL tillagd:", response.dog);
+  //       // this.loadDogs();
+  //       this.dogEventService.announceDogAdded();
+  //     },
+  //     error: (err) => console.error('Error adding dog:', err)
+  //   });
+
+  // }
+
   addDog() {
     if (!this.newDog.name || !this.newDog.breed || this.newDog.age === undefined) {
       alert('Fyll i alla fält!');
@@ -195,18 +240,47 @@ export class ProfileComponent implements OnInit {
     if (this.selectedFile) {
       formData.append("image", this.selectedFile);
     }
+
     this.closeAddDogModal();
+
     this.dogProfileService.addDog(formData).subscribe({
       next: (response) => {
-        console.log("Ny hundJÄVEL tillagd:", response.dog);
-        this.loadDogs();
+        const newDog = response.dog;
+        const newDogId = newDog._id;
+
+        // Lägg till nya hunden direkt i listan
+        this.dogs.push(newDog);
+
+        // Uppdatera select-dropdown till nya hunden
+        this.dogForm.patchValue({ selectedDog: newDogId });
+
+        // Ladda in hundens profil och senaste träning
+        this.selectDog(newDogId);
+        this.dogEventService.announceDogAdded();
+        this.snackBar.open(`Hunden ${newDog.nickname} är tillagd!`, 'Stäng', {
+          duration: 3000,
+          verticalPosition: 'top',
+          panelClass: ['snackbar-success']
+        });
+
+        // Återställ formuläret
+        this.newDog = {
+          name: '',
+          nickname: '',
+          breed: '',
+          age: 0,
+          sex: 'male'
+        };
+        this.selectedFile = null;
+        this.selectedFileName = null;
       },
       error: (err) => console.error('Error adding dog:', err)
     });
-
-
-
   }
+
+
+
+
 
 
   // För att visa valt filnamn i inputfältet
@@ -260,8 +334,5 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-
-
-
 
 }

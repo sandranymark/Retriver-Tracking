@@ -10,8 +10,9 @@
             <img [src]="getDogImage(activeDog.imageUrl)" [alt]="activeDog.name" class="dog-profile-pic">
         </div>
         <form class="select__dog-form" [formGroup]="dogForm">
-            <mat-form-field appearance="outline" class="no-outline" matTooltip="Välj en hund"
-                matTooltipPosition="right">
+
+            <mat-form-field appearance="outline" class="no-outline">
+                <mat-label>Välj hund</mat-label>
                 <mat-select formControlName="selectedDog" (selectionChange)="selectDog($event.value)">
                     <mat-option *ngFor="let dog of dogs" [value]="dog._id">
                         {{ dog.nickname }}
@@ -60,19 +61,7 @@
         hund</button>
 
 
-    <!-- <div class="training-card" *ngIf="latestTraining">
-        <h2 class="training-card__name">{{ activeDog?.nickname }}s senaste träningspass</h2>
-        <p><strong>Typ:</strong> {{ latestTraining.type }}</p>
-        <p><strong>Anteckningar:</strong><br> {{ latestTraining.notes }}</p>
-        <div class="training-detail rating-stars">
-            <app-rating [rating]="latestTraining.rating" [max]="5" [showValue]="true"></app-rating>
-        </div>
-        <p><strong>Datum:</strong> {{ latestTraining.createdAt | date: 'yyyy-MM-dd HH:mm' }}</p>
-    </div>
-    <div class="training-card" *ngIf="!latestTraining">
-        <p>Inget träningspass registrerat för {{ activeDog?.nickname }} ännu.</p>
-    </div>
- -->
+
 
     <app-latest-training [training]="latestTraining" [dogName]="activeDog?.nickname">
     </app-latest-training>
@@ -101,7 +90,7 @@
 
                 <mat-form-field class="margin-bottom" appearance="outline">
                     <mat-label>Smeknamn</mat-label>
-                    <input matInput [(ngModel)]="newDog.nickname" name="nickname">
+                    <input matInput [(ngModel)]="newDog.nickname" name="nickname" required>
                 </mat-form-field>
 
                 <mat-form-field class="margin-bottom" appearance="outline">

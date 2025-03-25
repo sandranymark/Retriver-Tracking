@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { provideNativeDateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Training } from './models/training.model';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @Component({
   standalone: true,
@@ -25,6 +27,7 @@ import { Training } from './models/training.model';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    MatSnackBarModule
 
   ],
   templateUrl: './app.component.html',

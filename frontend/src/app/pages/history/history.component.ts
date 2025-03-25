@@ -10,6 +10,7 @@ import { MatSelect } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/select';
 import { forkJoin } from 'rxjs'; // Är den mest idiotisk,enkla, pålitliga sättet Angular har att hantera flera parallella HTTP-anrop på.
+import { TrainingEventService } from '../../core/training-event.service';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class HistoryComponent implements OnInit {
 
   constructor(
     private trainingService: TrainingService,
-    private dogProfileService: DogProfileService
+    private dogProfileService: DogProfileService,
+    private trainingEventService: TrainingEventService,
   ) { }
 
   ngOnInit() {
@@ -43,6 +45,15 @@ export class HistoryComponent implements OnInit {
       },
       error: (err) => console.error("Kunde inte hämta hundar:", err)
     });
+    this.trainingEventService.trainingAdded$.subscribe((dogId) => {
+      if (this.showAllDogs) {
+        this.loadTrainingsForAllDogs(); // om man är i "visa alla" hundjävlar
+      } else if (this.selectedDogId === dogId) {
+        this.loadTrainingsForDog(dogId); // om man kollar på den hunden som uppdaterats
+      }
+    });
+
+
   }
 
   onToggleShowAll() {
