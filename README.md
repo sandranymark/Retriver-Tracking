@@ -2,7 +2,7 @@
 
 👉 Live: [https://ex.dev.nymark.nu](https://ex.dev.nymark.nu)
 
-Retriever Tracker is a modern web-based application for creating and managing profiles for retrieving bird dogs.  
+Retriever Tracker is a modern web-based application for creating and managing profiles for Retriever dogs.  
 Used to log training sessions, upload portrait images, and follow the dog's progress over time.  
 The app is optimized for mobile use.
 
