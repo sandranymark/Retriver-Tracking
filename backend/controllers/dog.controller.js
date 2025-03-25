@@ -8,23 +8,6 @@ import { dogValidation } from "../validation/dog.validation.js";
 // Skapar en ny hundprofil på den inloggade användaren
 
 
-
-// export const createDog = async (req, res) => {
-//     const { error } = dogValidation.validate(req.body);
-//     if (error) return res.status(400).json({ error: error.details[0].message });
-
-//     const newDog = new Dog({
-//         ...req.body,
-//         owner: req.user.userId,
-//         imageUrl: req.file ? `uploads/${req.file.filename}` : undefined
-//     });
-
-//     await newDog.save();
-//     res.status(201).json({ message: "Dog profile created!", dog: newDog });
-// };
-
-
-
 export const createDog = async (req, res) => {
     const { error } = dogValidation.validate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
@@ -38,11 +21,11 @@ export const createDog = async (req, res) => {
         try {
             // Komprimera & spara ny fil
             await sharp(originalPath)
+                .rotate() // ska fixa SKITEN med att iphone bilderna roterar
                 .resize(300, 300)
                 .jpeg({ quality: 80 })  // justerar kvaliten
                 .toFile(compressedPath);
 
-            // Ta bort originalfilen
             fs.unlinkSync(originalPath);
 
             // Sätt rätt path i databasen
