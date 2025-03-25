@@ -67,14 +67,18 @@ export class TrainingModalComponent implements OnInit {
 
     const formData = this.trainingForm.value;
 
+    const selectedDate = new Date(formData.date);
+    selectedDate.setHours(12, 0, 0, 0);
+    // sätter tiden till 12:00 för att undvika UTC-glidning 
+    //( fick problem med att datumet blev en dag tidigare än det skulle vara )
+
     const trainingData = {
       dogId: formData.dog,
-      date: new Date(formData.date).toISOString(),
+      date: selectedDate,
       type: formData.type,
       notes: formData.notes,
       rating: formData.rating
     };
-
 
     this.trainingService.addTraining(trainingData).subscribe({
       next: (savedTraining) => {

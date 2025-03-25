@@ -219,11 +219,24 @@ export class ProfileComponent implements OnInit {
   }
 
 
+  // getDogImage(imagePath: string | undefined): string {
+  //   if (!imagePath) {
+  //     return 'assets/img/flatcoatedRetriever3.jpg'; // Dummybild om ingen finns
+  //   }
+  //   return `http://localhost:8181/${imagePath}`;
+  // }
+
   getDogImage(imagePath: string | undefined): string {
     if (!imagePath) {
-      return 'assets/img/flatcoatedRetriever3.jpg'; // Dummybild om ingen finns
+      return 'assets/img/flatcoatedRetriever3.jpg';
     }
-    return `http://localhost:8181/${imagePath}`;
+
+    // Om körs lokalt (Angular dev server), använd proxy till localhost:8181
+    const isLocalhost = window.location.hostname === 'localhost';
+
+    return isLocalhost
+      ? `http://localhost:8181/${imagePath}`
+      : `/${imagePath}`; // produktion – samma domän som frontend
   }
 
 

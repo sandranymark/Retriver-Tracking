@@ -39,6 +39,12 @@ export class AppComponent {
     private dogProfileService: DogProfileService
   ) { }
 
+
+
+  get isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
   openTrainingModal() {
     this.dogProfileService.getAllDogs().subscribe(dogs => {
       const dialogRef = this.dialog.open(TrainingModalComponent, {

@@ -5,9 +5,10 @@
     <div class="modal" (click)="closeModal()">
         <div class="modal-content" (click)="$event.stopPropagation()">
             <span class="close" (click)="closeModal()">&times;</span>
-            <h2>{{ selectedSession.title }}</h2>
-            <p><strong>Datum:</strong> {{ selectedSession.date }}</p>
-            <p><strong>Detaljer:</strong> {{ selectedSession.details }}</p>
+            <h2 class="modal__heading">{{ selectedSession.title }}</h2>
+            <p class="modal__name"> {{ selectedSession.dogName }}</p>
+            <p class="modal__date"><strong>Datum:</strong> {{ selectedSession.date }}</p>
+            <p class="modal__details"><strong>Detaljer:</strong> {{ selectedSession.details }}</p>
         </div>
     </div>
     }

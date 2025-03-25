@@ -17,4 +17,5 @@ export interface TrainingSession {
     date: string;
     details: string;
     dogImageUrl?: string;
+    dogName?: string;
 }

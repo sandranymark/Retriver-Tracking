@@ -50,7 +50,7 @@ export class CalendarComponent {
         events: this.recentSessions.map(session => ({
           title: session.title,
           start: session.date,
-          extendedProps: { details: session.details }
+          extendedProps: { details: session.details, dogName: session.dogName }
         }))
       };
     }
@@ -64,7 +64,8 @@ export class CalendarComponent {
     this.selectedSession = {
       title: eventInfo.event.title,
       date: eventInfo.event.startStr,
-      details: eventInfo.event.extendedProps['details']
+      details: eventInfo.event.extendedProps['details'],
+      dogName: eventInfo.event.extendedProps['dogName']
     };
   }
 

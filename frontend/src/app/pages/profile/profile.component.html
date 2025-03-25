@@ -1,13 +1,14 @@
 <div class="container">
+
     <div ngClass="profile-card no-dog" *ngIf="dogs.length === 0" class="no-dogs-message">
         <p>Ingen hund registrerad ännu.</p>
     </div>
 
     <div class="header" *ngIf="activeDog">
 
-
-        <img [src]="getDogImage(activeDog.imageUrl)" [alt]="activeDog.name" class="dog-profile-pic">
-
+        <div class="picture">
+            <img [src]="getDogImage(activeDog.imageUrl)" [alt]="activeDog.name" class="dog-profile-pic">
+        </div>
         <form class="select__dog-form" [formGroup]="dogForm">
             <mat-form-field appearance="outline" class="no-outline" matTooltip="Välj en hund"
                 matTooltipPosition="right">

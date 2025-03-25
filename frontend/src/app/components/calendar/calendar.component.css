@@ -1,7 +1,6 @@
 .calendar-container {
     max-width: 900px;
     margin: 20px auto;
-
 }
 
 
@@ -79,6 +78,22 @@
     background: #45a049;
 }
 
+.modal__heading {
+    margin: 10px 0 0 0;
+}
+
+.modal__name,
+.modal__date,
+.modal__details {
+    margin: 0;
+}
+
+
+.modal__details {
+    margin: 10px 0 10px 0;
+    border: 1px solid var(--primary-color);
+    border-radius: 3px;
+}
 
 @media screen and (max-width: 400px) {
     .calendar-container {

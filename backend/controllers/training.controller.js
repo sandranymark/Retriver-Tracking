@@ -4,7 +4,7 @@ import Dog from "../models/Dog.model.js";
 
 export const createTraining = async (req, res) => {
     try {
-        const { dogId, type, notes, rating } = req.body;
+        const { dogId, type, notes, rating, date } = req.body;
 
         const dog = await Dog.findById(dogId);
         if (!dog) {
@@ -16,6 +16,7 @@ export const createTraining = async (req, res) => {
             type,
             notes,
             rating,
+            date: date ? new Date(date) : undefined,
             owner: req.user.userId
         });
 
