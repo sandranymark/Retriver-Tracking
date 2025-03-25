@@ -89,7 +89,7 @@ Instead, you’re welcome to read through the code and test the app live at:
 
 ---
 
-## 🧑‍⚖️ For opponent – how to test the app
+## 🧑‍⚖️ For Reviewer – how to test the app
 
 1. Go to 👉 [https://ex.dev.nymark.nu](https://ex.dev.nymark.nu)  
 2. Register an account  
