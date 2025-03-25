@@ -31,17 +31,7 @@ export class AuthComponent {
     this.errorMessage = '';
   }
 
-  // login() {
-  //   this.authService.login({ email: this.email, password: this.password }).subscribe({
-  //     next: (res) => {
-  //       console.log('Login successful!', res);
-  //       this.router.navigate(['/home']);
-  //     },
-  //     error: (err) => {
-  //       this.errorMessage = 'Felaktigt användarnamn eller lösenord';
-  //     }
-  //   });
-  // }
+
 
   login() {
     this.authService.login({ email: this.email, password: this.password }).subscribe({
@@ -65,21 +55,6 @@ export class AuthComponent {
     });
   }
 
-
-  // register() {
-  //   this.authService.register({ username: this.username, email: this.email, password: this.password }).subscribe({
-  //     next: (res) => {
-  //       console.log('Registration successful!', res);
-  //       this.successMessage = 'Lyckad registrering!';
-  //       setTimeout(() => {
-  //         this.toggleForm();
-  //       }, 2000);
-  //     },
-  //     error: (err) => {
-  //       this.errorMessage = 'Misslyckad registrering MOHAHA';
-  //     }
-  //   });
-  // }
 
   register() {
     this.authService.register({ username: this.username, email: this.email, password: this.password }).subscribe({
