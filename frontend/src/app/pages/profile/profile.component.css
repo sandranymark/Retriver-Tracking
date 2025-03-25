@@ -2,24 +2,20 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    /* background-color: #13232E; */
-    /* background-color: #2F4858; */
-    /* background-color: #6F7E5B; */
     padding: 20px;
-    height: 100%;
 }
+
+
 
 .picture {
     position: relative;
     margin-left: -50vw;
     margin-right: -50vw;
     width: 100vw;
-    margin-top: -15%;
-
+    margin-top: -6%;
     display: flex;
     justify-content: center;
     align-items: center;
-
     height: 300px;
     background-image: url('/assets/backgrounds/63f3a26d-7fd3-4442-8982-4f870d956e79.webp');
     background-size: cover;
@@ -48,14 +44,13 @@
     box-shadow: 0px 0px 15px rgba(5, 5, 5, 0.7);
     object-fit: cover;
     object-position: center;
-    /* object-position: calc(50% - -10px) calc(50%); */
 }
 
 
 .profile-card,
 .health-tracking,
 .weight-tracking {
-
+    border-left: 6px solid #1a353e;
     background-color: white;
     filter: drop-shadow(3px 3px 4px #000);
     padding: 15px;
@@ -84,7 +79,6 @@
 
 }
 
-/* Progress bars */
 .progress {
     display: flex;
     align-items: center;
@@ -135,7 +129,7 @@
     background: #e07b3a;
 }
 
-/* Vikt tracking */
+
 .weight-value {
     font-size: 20px;
     font-weight: bold;
@@ -186,7 +180,6 @@ ul {
 
 .profile-card {
     color: black;
-    /* background: #2C4959; */
     background-color: white;
     filter: drop-shadow(3px 3px 4px #050505);
     padding: 20px;
@@ -196,7 +189,7 @@ ul {
     margin-bottom: 15px;
 }
 
-/* Edit-knapp */
+
 .profile__card-icons {
     display: flex;
     justify-content: flex-end;
@@ -274,15 +267,8 @@ ul {
     align-items: center;
 }
 
-/* ::ng-deep .no-outline .mdc-notched-outline {
-    display: none;
-} */
-
-
 .no-outline {
     width: 90vw;
-    /* background-color: #6a8b796b; */
-
 }
 
 
@@ -305,8 +291,6 @@ mat-select {
     font-weight: 700;
     color: black;
 }
-
-
 
 mat-option {
     color: black;
@@ -345,7 +329,6 @@ mat-option {
     background: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 12px;
-    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); */
     width: 80%;
     max-width: 400px;
     text-align: center;
@@ -391,7 +374,6 @@ mat-option {
 .file-upload label {
     display: block;
     background: #ff8c42;
-    /* Primär färg */
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
@@ -405,7 +387,6 @@ mat-option {
 
 .file-input {
     display: none;
-    /* Gömmer det fula standard file input */
 }
 
 .file-name {
@@ -416,8 +397,6 @@ mat-option {
     font-weight: 500;
 }
 
-
-
 .training-card {
     filter: drop-shadow(3px 3px 4px #050505);
     background: #f5f5f5;
@@ -426,8 +405,6 @@ mat-option {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
 }
-
-
 
 .training-card p {
     margin: 0.4rem 0;
@@ -448,5 +425,4 @@ mat-option {
     padding: 10px;
     margin: 0;
     border-radius: 8px;
-    /* filter: drop-shadow(3px 3px 4px #050505); */
 }

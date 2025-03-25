@@ -1,12 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FooterComponent } from "../../components/footer/footer.component";
 
 
 @Component({
+  standalone: true,
   selector: 'app-home',
-  imports: [],
+  imports: [CommonModule, FooterComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  showMore: boolean[] = [false, false, false];
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  toggleMore(index: number) {
+    this.showMore[index] = !this.showMore[index];
+  }
 
 }

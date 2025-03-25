@@ -1,1 +1,75 @@
-<section class="home-wrapper"></section>
+<header class="home-header"></header>
+<section class="home-wrapper">
+
+    <header class="header">
+        <h1>Retriever Tracker</h1>
+    </header>
+
+
+    <div class="image"></div>
+
+
+    <div class="card-container">
+
+        <!-- Kort 1 -->
+        <article class="home__article-card">
+            <p class="home__text">
+                Retrievern är en apporterande fågelhund som används för att hämta vilt, ofta i vatten eller tät
+                vegetation.
+            </p>
+            <div *ngIf="showMore[0]" class="home__text">
+                Den ska vara stadig vid skott, kunna markera nedslagen fågel, och snabbt apportera på kommando.
+                Apportering
+                kräver både lydnad och samarbetsvilja.
+            </div>
+            <div class="read-more" (click)="toggleMore(0)">
+                {{ showMore[0] ? 'Visa mindre' : 'Läs mer' }}
+            </div>
+        </article>
+
+        <!-- Kort 2 -->
+        <article class="home__article-card">
+            <p class="home__text">
+                Vid fågeljakt (t.ex. på duva, gås, eller änder) krävs en apporterande eller markerande hund.
+            </p>
+            <div *ngIf="showMore[1]" class="home__text">
+                Detta enligt jaktlagstiftningen. Kravet gäller särskilt vid jakt i skymning eller gryning. Det är
+                jägaren som
+                ansvarar för att viltet tas tillvara på ett etiskt sätt.
+            </div>
+            <div class="read-more" (click)="toggleMore(1)">
+                {{ showMore[1] ? 'Visa mindre' : 'Läs mer' }}
+            </div>
+        </article>
+
+        <!-- Kort 3 -->
+        <article class="home__article-card">
+            <p class="home__text">
+                Träning inför retrieverprov stärker både lydnad och jaktfunktion.
+            </p>
+            <div *ngIf="showMore[2]" class="home__text">
+                Retrieverprov testar hundens förmåga att markera, söka, bära och lämna av vilt korrekt. Dessa prov är
+                frivilliga
+                men värdefulla i avel och jakt.
+            </div>
+            <div class="read-more" (click)="toggleMore(2)">
+                {{ showMore[2] ? 'Visa mindre' : 'Läs mer' }}
+            </div>
+        </article>
+    </div>
+
+
+    <div class="jumping-flat"></div>
+
+    <div class="skk-start">
+        <h2 class="skk-start--heading">Dags att anmäla er till jaktprov? 👇</h2>
+        <a href="https://skkstart.se/" target="_blank">
+            <img class="bild" src="/assets/icons/skk-start-logo-negative.d3cbb9bb6774eaa8ebe44e1591f44f5b.png"
+                alt="Skk-start-loggo" />
+        </a>
+    </div>
+
+    <div class="retriever"></div>
+</section>
+
+<app-footer></app-footer>

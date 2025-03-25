@@ -17,6 +17,7 @@ import { LatestTrainingComponent } from '../../shared/latest-training/latest-tra
 import { TrainingEventService } from '../../core/training-event.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DogEventService } from '../../core/dog-event.service';
+import { FooterComponent } from "../../components/footer/footer.component";
 
 
 @Component({
@@ -34,7 +35,7 @@ import { DogEventService } from '../../core/dog-event.service';
     MatSelectModule,
     MatOptionModule,
     LatestTrainingComponent,
-
+    FooterComponent
   ],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
@@ -105,7 +106,7 @@ export class ProfileComponent implements OnInit {
         this.dogs = dogs;
 
         if (dogs.length > 0) {
-          this.dogForm.patchValue({ selectedDog: dogs[0]._id }); // Sätt första hunden som default
+          this.dogForm.patchValue({ selectedDog: dogs[0]._id }); // Sätter första hunden som default
           this.selectDog(dogs[0]._id);
         }
 
@@ -194,36 +195,6 @@ export class ProfileComponent implements OnInit {
   }
 
 
-
-  // addDog() {
-  //   if (!this.newDog.name || !this.newDog.breed || this.newDog.age === undefined) {
-  //     alert('Fyll i alla fält!');
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-  //   formData.append("name", this.newDog.name!);
-  //   formData.append("nickname", this.newDog.nickname || '');
-  //   formData.append("breed", this.newDog.breed!);
-  //   formData.append("age", this.newDog.age.toString());
-  //   formData.append("sex", this.newDog.sex!);
-
-  //   if (this.selectedFile) {
-  //     formData.append("image", this.selectedFile);
-  //   }
-  //   this.closeAddDogModal();
-
-  //   this.dogProfileService.addDog(formData).subscribe({
-  //     next: (response) => {
-  //       console.log("Ny hundJÄVEL tillagd:", response.dog);
-  //       // this.loadDogs();
-  //       this.dogEventService.announceDogAdded();
-  //     },
-  //     error: (err) => console.error('Error adding dog:', err)
-  //   });
-
-  // }
-
   addDog() {
     if (!this.newDog.name || !this.newDog.breed || this.newDog.age === undefined) {
       alert('Fyll i alla fält!');
@@ -248,13 +219,10 @@ export class ProfileComponent implements OnInit {
         const newDog = response.dog;
         const newDogId = newDog._id;
 
-        // Lägg till nya hunden direkt i listan
         this.dogs.push(newDog);
-
-        // Uppdatera select-dropdown till nya hunden
         this.dogForm.patchValue({ selectedDog: newDogId });
 
-        // Ladda in hundens profil och senaste träning
+
         this.selectDog(newDogId);
         this.dogEventService.announceDogAdded();
         this.snackBar.open(`Hunden ${newDog.nickname} är tillagd!`, 'Stäng', {
@@ -293,12 +261,6 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  // getDogImage(imagePath: string | undefined): string {
-  //   if (!imagePath) {
-  //     return 'assets/img/flatcoatedRetriever3.jpg'; // Dummybild om ingen finns
-  //   }
-  //   return `http://localhost:8181/${imagePath}`;
-  // }
 
   getDogImage(imagePath: string | undefined): string {
     if (!imagePath) {

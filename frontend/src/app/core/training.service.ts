@@ -27,17 +27,11 @@ export class TrainingService {
         });
     }
 
-
-
-    // addTraining(trainingData: Training): Observable<Training> {
-    //     return this.http.post<Training>(`${this.apiUrl}`, trainingData, { headers: this.getAuthHeaders() });
-    // }
     addTraining(trainingData: any): Observable<Training> {
         return this.http.post<Training>(`${this.apiUrl}`, trainingData, {
             headers: this.getAuthHeaders()
         });
     }
-
 
     deleteTraining(trainingId: string): Observable<void> {
         return this.http.delete<void>(`${this.apiUrl}/${trainingId}`, { headers: this.getAuthHeaders() });

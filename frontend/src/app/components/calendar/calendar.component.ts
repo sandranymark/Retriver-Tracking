@@ -78,12 +78,7 @@ export class CalendarComponent {
     this.selectedSession = null;
   }
 
-  // handleDateClick(dateClickInfo: DateClickArg) {
-  //   this.selectedDate = dateClickInfo.dateStr;
-  //   this.showAddTrainingModal = true;
-  //   this.newTrainingTitle = "";
-  //   this.newTrainingDetails = "";
-  // }
+
   handleDateClick(dateClickInfo: DateClickArg) {
     const selectedDate = dateClickInfo.date;
 
@@ -104,8 +99,6 @@ export class CalendarComponent {
   }
 
 
-
-
   closeAddTrainingModal() {
     this.showAddTrainingModal = false;
   }
@@ -124,7 +117,6 @@ export class CalendarComponent {
 
 
     this.recentSessions = [newSession, ...this.recentSessions].slice(0, 5);
-    // Uppdaterar kalendern
     this.ngOnChanges({ recentSessions: { currentValue: this.recentSessions, previousValue: [], firstChange: false, isFirstChange: () => false } });
     this.closeAddTrainingModal();
   }

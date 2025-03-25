@@ -4,7 +4,6 @@
     padding: 20px;
     background: #ffffff;
     border-radius: 8px;
-
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -15,7 +14,6 @@
     color: #333;
 }
 
-
 .training__form {
     width: 300px;
     display: flex;
@@ -23,22 +21,18 @@
     gap: 15px;
 }
 
-
 .training__form-group {
     display: flex;
     flex-direction: column;
 }
 
-
 .training__field {
     width: 100%;
 }
 
-
 .training__field--textarea textarea {
     min-height: 80px;
 }
-
 
 .training__field--rating input {
     text-align: center;
@@ -63,8 +57,6 @@
     font-size: 24px;
 }
 
-
-
 .training__submit {
     width: 100%;
     padding: 10px;
@@ -72,7 +64,6 @@
     background-color: var(--primary-color) !important;
     color: white !important;
 }
-
 
 .training__actions {
     display: flex;

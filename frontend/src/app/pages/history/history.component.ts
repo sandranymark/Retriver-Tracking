@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOption } from '@angular/material/select';
 import { forkJoin } from 'rxjs'; // Är den mest idiotisk,enkla, pålitliga sättet Angular har att hantera flera parallella HTTP-anrop på.
 import { TrainingEventService } from '../../core/training-event.service';
+import { FooterComponent } from "../../components/footer/footer.component";
 
 
 @Component({
@@ -18,7 +19,7 @@ import { TrainingEventService } from '../../core/training-event.service';
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css'],
-  imports: [CalendarComponent, CommonModule, FormsModule, MatFormFieldModule, MatSelect, MatOption]
+  imports: [CalendarComponent, CommonModule, FormsModule, MatFormFieldModule, MatSelect, MatOption, FooterComponent]
 })
 
 export class HistoryComponent implements OnInit {
@@ -47,9 +48,9 @@ export class HistoryComponent implements OnInit {
     });
     this.trainingEventService.trainingAdded$.subscribe((dogId) => {
       if (this.showAllDogs) {
-        this.loadTrainingsForAllDogs(); // om man är i "visa alla" hundjävlar
+        this.loadTrainingsForAllDogs();
       } else if (this.selectedDogId === dogId) {
-        this.loadTrainingsForDog(dogId); // om man kollar på den hunden som uppdaterats
+        this.loadTrainingsForDog(dogId);
       }
     });
 
@@ -68,7 +69,6 @@ export class HistoryComponent implements OnInit {
   loadTrainingsForDog(dogId: string) {
 
     this.showAllDogs = false;
-
     const dogMap = new Map(this.dogs.map(dog => [dog._id.toString(), dog]));
 
     this.trainingService.getTrainingsForDog(dogId).subscribe({
@@ -81,11 +81,9 @@ export class HistoryComponent implements OnInit {
 
 
   loadTrainingsForAllDogs() {
-
     const dogMap = new Map(this.dogs.map(dog => [dog._id.toString(), dog]));
     const allRequests$ = this.dogs.map(dog =>
       this.trainingService.getTrainingsForDog(dog._id)
-
     );
 
     forkJoin(allRequests$).subscribe({
@@ -120,21 +118,9 @@ export class HistoryComponent implements OnInit {
   }
 
 
-
-
-
   trackByDate(index: number, session: TrainingSession): string {
     return session.date + session.title;
   }
-
-
-
-  // getDogImage(imagePath: string | undefined): string {
-  //   if (!imagePath) {
-  //     return 'assets/img/flatcoatedRetriever3.jpg'; // Dummybild om ingen finns
-  //   }
-  //   return `http://localhost:8181/${imagePath}`;
-  // }
 
 
   getDogImage(imagePath: string | undefined): string {

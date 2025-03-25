@@ -55,17 +55,7 @@ export class TrainingModalComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) { }
 
-  // ngOnInit() {
-  //   this.dogs = this.data.dogs;
 
-  //   this.trainingForm = this.fb.group({
-  //     dog: [this.dogs.length > 0 ? this.dogs[0]._id : '', Validators.required],
-  //     date: ['', Validators.required],
-  //     type: ['', Validators.required],
-  //     notes: ['', Validators.maxLength(500)],
-  //     rating: [3, [Validators.required, Validators.min(1), Validators.max(5)]]
-  //   });
-  // }
   ngOnInit() {
     this.trainingForm = this.fb.group({
       dog: ['', Validators.required],
@@ -89,7 +79,6 @@ export class TrainingModalComponent implements OnInit {
     if (this.trainingForm.invalid) return;
 
     const formData = this.trainingForm.value;
-
     const selectedDate = new Date(formData.date);
     selectedDate.setHours(12, 0, 0, 0);
     // sätter tiden till 12:00 för att undvika UTC-glidning 
@@ -114,15 +103,12 @@ export class TrainingModalComponent implements OnInit {
             panelClass: ['snackbar-success']
           }
         );
-
         this.trainingEventService.announceTrainingAdded(trainingData.dogId);
         this.dialogRef.close(savedTraining);
       },
       error: (err) => console.error('Kunde inte spara träningspass:', err)
     });
   }
-
-
 
   closeModal() {
     this.dialogRef.close();

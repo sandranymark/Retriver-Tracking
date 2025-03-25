@@ -2,14 +2,13 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem 1rem;
-
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .jakt-header {
-    background-color: #3b5f3b;
+    background-color: #1a353e;
     color: #fff;
-    padding: 1rem;
+    padding: 0.8rem 1rem 1rem 1rem;
     font-size: 1.8rem;
     text-align: center;
     font-weight: bold;
@@ -91,11 +90,9 @@ li strong {
     color: #333;
 }
 
-
 .jakt-card {
-
     background-color: #fff;
-    border-left: 6px solid #3b5f3b;
+    border-left: 6px solid #1a353e;
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 0.75rem;
@@ -121,8 +118,6 @@ li strong {
     display: inline-block;
     margin-right: 0.5rem;
 }
-
-
 
 .jakt-card.with-dog .card-header {
     display: flex;

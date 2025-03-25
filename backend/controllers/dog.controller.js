@@ -10,13 +10,10 @@ export const createDog = async (req, res) => {
     const newDog = new Dog({
         ...req.body,
         owner: req.user.userId,
-        // imageUrl: `uploads/${req.file.filename}`
         imageUrl: req.file ? `uploads/${req.file.filename}` : undefined
-
     });
 
     await newDog.save();
-
     res.status(201).json({ message: "Dog profile created!", dog: newDog });
 };
 

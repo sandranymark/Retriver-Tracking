@@ -3,8 +3,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
 
-
-
 @Component({
   selector: 'app-rating',
   templateUrl: './rating.component.html',

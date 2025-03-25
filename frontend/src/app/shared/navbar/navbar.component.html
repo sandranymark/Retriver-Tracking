@@ -8,19 +8,19 @@
     <button class="close-menu" (click)="toggleMenu()">
         <mat-icon>close</mat-icon>
     </button>
+    <a routerLink="/home" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>home</mat-icon>
+        <span>Startsida</span>
+    </a>
+
     <a routerLink="/my-dogs" routerLinkActive="active" (click)="closeMenu()">
         <mat-icon>pets</mat-icon>
         <span>Mina hundar</span>
     </a>
 
-    <a routerLink="/training" routerLinkActive="active" (click)="closeMenu()">
-        <mat-icon>sports_baseball</mat-icon>
-        <span>Träning</span>
-    </a>
-
     <a routerLink="/history" routerLinkActive="active" (click)="closeMenu()">
         <mat-icon>history</mat-icon>
-        <span>Historik</span>
+        <span>Träningshistorik</span>
     </a>
 
     <a (click)="logout()" class="logout">

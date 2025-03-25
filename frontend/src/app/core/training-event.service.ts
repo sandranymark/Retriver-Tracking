@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 export class TrainingEventService {
 
     // Emitter för när ett nytt träningspass har lagts till ( jag vill att andra komponenter ska kunna lyssna på detta )
-    private trainingAddedSource = new Subject<string>(); // vi skickar med dogId
+    private trainingAddedSource = new Subject<string>();
 
     // Observable som andra komponenter kan lyssna på
     trainingAdded$ = this.trainingAddedSource.asObservable();

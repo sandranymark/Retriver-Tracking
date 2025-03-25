@@ -13,6 +13,7 @@ import { Training } from './models/training.model';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
+
 @Component({
   standalone: true,
   selector: 'app-root',
@@ -27,7 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
 
   ],
   templateUrl: './app.component.html',

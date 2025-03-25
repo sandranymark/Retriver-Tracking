@@ -3,8 +3,6 @@
     margin: 20px auto;
 }
 
-
-
 .modal {
     display: flex;
     position: fixed;
@@ -87,7 +85,6 @@
 .modal__details {
     margin: 0;
 }
-
 
 .modal__details {
     margin: 10px 0 10px 0;

@@ -5,7 +5,6 @@ import User from "../models/User.model.js";
 
 const router = express.Router();
 
-// Använd controllers istället för inline-kod
 router.post("/register", register);
 router.post("/login", login);
 
