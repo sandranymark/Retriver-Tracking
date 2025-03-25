@@ -119,16 +119,16 @@ Instead, you’re welcome to read through the code and test the app live at:
 ## Thanks, tears & transparency
 
 This project is my own final assignment.  
-I want to be transparent and mention that I received help from my husband with parts of the server configuration – such as setting up the reverse proxy, SSL certificates, geoblocking, and Docker networking.  
+I want to be transparent and mention that I received help from my husband with parts of the server configuration – such as setting up the reverse proxy, SSL certificates, geoblocking, and networking.  
 All frontend, backend, and core functionality was built and designed by me.
 
-I’m proud of what I’ve accomplished and see this as a solid step toward becoming a developer.
+I’m pleased of what I’ve achieved and see this as a solid step toward becoming a developer.
 
 ---
 
 #### There’s a lot I had hoped to polish further, but my focus was on hitting the goals I set for this project – and I did.
 
-# Over and out.
+# Over and out - Sandra 
 
 
 
