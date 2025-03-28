@@ -5,11 +5,14 @@ import authRoutes from "./routes/auth.routes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import dogRoutes from "./routes/dog.routes.js";
 import trainingRoutes from "./routes/training.routes.js";
+import cookieParser from "cookie-parser";
+
 
 dotenv.config(); // Hämtar .env filen
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
 
 const PORT = process.env.PORT || 5000;
@@ -21,6 +24,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/dogs", dogRoutes)
 app.use("/api/trainings", trainingRoutes);
 app.use(errorHandler);
+
 
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://${process.env.HOST || "localhost"}:${PORT}`);

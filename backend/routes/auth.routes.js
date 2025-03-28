@@ -1,5 +1,5 @@
 import express from "express";
-import { register, login } from "../controllers/auth.controller.js";
+import { register, login, refreshToken, logout } from "../controllers/auth.controller.js";
 import { authenticateUser, authorizeAdmin } from "../middleware/auth.middleware.js";
 import User from "../models/User.model.js";
 
@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
+router.post("/refresh-token", refreshToken);
+router.post("/logout", logout);
 
 // Hämta alla användare (Endast admin)
 router.get("/users", authenticateUser, authorizeAdmin, async (req, res, next) => {
